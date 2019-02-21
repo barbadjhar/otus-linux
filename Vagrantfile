@@ -53,7 +53,7 @@ MACHINES = {
                         :size => 200, # Megabytes
                         :port => 9
                 },
-
+               
 	}
 
 		
@@ -78,7 +78,7 @@ Vagrant.configure("2") do |config|
                   needsController = false
 		  boxconfig[:disks].each do |dname, dconf|
 			  unless File.exist?(dconf[:dfile])
-				vb.customize ['createhd', '--filename', dconf[:dfile], '--variant', 'Fixed', '--size', dconf[:size]]
+				vb.customize ['createmedium', '--filename', dconf[:dfile], '--format', 'VDI', '--variant', 'Fixed', '--size', dconf[:size]]
                                 needsController =  true
                           end
 
@@ -90,9 +90,9 @@ Vagrant.configure("2") do |config|
                      end
                   end
           end
+      
 
-          config.vm.provision "file", source: "./scripts/init_md.sh", destination: "init_md.sh" 
-
+      config.vm.provision "file", source: "./scripts/init_md.sh", destination: "init_md.sh" 
 
  	  box.vm.provision "shell", inline: <<-SHELL
 	      mkdir -p ~root/.ssh
@@ -105,8 +105,6 @@ Vagrant.configure("2") do |config|
           #box.vm.provision "shell", path: "scripts/init_md.sh"
 
       end
-
-      #config.vm.synced_folder "share/", "/opt/share"
   end
 end
 

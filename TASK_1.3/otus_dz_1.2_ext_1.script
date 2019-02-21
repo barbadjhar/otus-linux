@@ -1,0 +1,2033 @@
+Script started on Thu 21 Feb 2019 01:19:10 PM UTC
+]0;vagrant@lvm:~[?1034h[vagrant@lvm ~]$ sudo -i
+]0;root@lvm:~[?1034h[root@lvm ~]# ls[K[Klsblk 
+NAME                            MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda                               8:0    0   40G  0 disk 
+├─sda1                            8:1    0    1M  0 part 
+├─sda2                            8:2    0    1G  0 part /boot
+└─sda3                            8:3    0   39G  0 part 
+  ├─VolGroup00-LogVol00         253:0    0    8G  0 lvm  /
+  ├─VolGroup00-LogVol01         253:1    0  1.5G  0 lvm  [SWAP]
+  ├─VolGroup00-LogVol_home-real 253:8    0    2G  0 lvm  
+  │ ├─VolGroup00-LogVol_home    253:2    0    2G  0 lvm  /home
+  │ └─VolGroup00-snap_home      253:10   0    2G  0 lvm  
+  └─VolGroup00-snap_home-cow    253:9    0  128M  0 lvm  
+    └─VolGroup00-snap_home      253:10   0    2G  0 lvm  
+sdb                               8:16   0   10G  0 disk 
+sdc                               8:32   0    2G  0 disk 
+├─otus_vg_var-lv_var_rmeta_0    253:3    0    4M  0 lvm  
+│ └─otus_vg_var-lv_var          253:7    0  952M  0 lvm  /var
+└─otus_vg_var-lv_var_rimage_0   253:4    0  952M  0 lvm  
+  └─otus_vg_var-lv_var          253:7    0  952M  0 lvm  /var
+sdd                               8:48   0    1G  0 disk 
+├─otus_vg_var-lv_var_rmeta_1    253:5    0    4M  0 lvm  
+│ └─otus_vg_var-lv_var          253:7    0  952M  0 lvm  /var
+└─otus_vg_var-lv_var_rimage_1   253:6    0  952M  0 lvm  
+  └─otus_vg_var-lv_var          253:7    0  952M  0 lvm  /var
+sde                               8:64   0    1G  0 disk 
+]0;root@lvm:~[root@lvm ~]# pvs
+  PV         VG          Fmt  Attr PSize    PFree 
+  /dev/sda3  VolGroup00  lvm2 a--   <38.97g 27.34g
+  /dev/sdc   otus_vg_var lvm2 a--    <2.00g  1.06g
+  /dev/sdd   otus_vg_var lvm2 a--  1020.00m 64.00m
+]0;root@lvm:~[root@lvm ~]# gvs
+-bash: gvs: command not found
+]0;root@lvm:~[root@lvm ~]# vgs
+  VG          #PV #LV #SN Attr   VSize   VFree 
+  VolGroup00    1   3   1 wz--n- <38.97g 27.34g
+  otus_vg_var   2   1   0 wz--n-   2.99g  1.12g
+]0;root@lvm:~[root@lvm ~]# lvs
+  LV          VG          Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  LogVol00    VolGroup00  -wi-ao----   8.00g                                                    
+  LogVol01    VolGroup00  -wi-ao----   1.50g                                                    
+  LogVol_home VolGroup00  Owi-aos---   2.00g                                                    
+  lv_var      otus_vg_var rwi-aor--- 952.00m                                    100.00          
+]0;root@lvm:~[root@lvm ~]# pvcreate /dev/sde
+  Physical volume "/dev/sde" successfully created.
+]0;root@lvm:~[root@lvm ~]# vj[Kgcreate [Kc[Kvg
+vgcfgbackup    vgconvert      vgextend       vgmknodes      vgs            
+vgcfgrestore   vgcreate       vgimport       vgreduce       vgscan         
+vgchange       vgdisplay      vgimportclone  vgremove       vgsplit        
+vgck           vgexport       vgmerge        vgrename       
+[root@lvm ~]# vg[K[K�
+-bash: $'\206': command not found
+]0;root@lvm:~[root@lvm ~]# w
+ 13:57:49 up 22:09,  1 user,  load average: 0.00, 0.01, 0.05
+USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
+vagrant  pts/1                     13:19    5.00s  0.12s  0.00s script --timing=./otus_dz_1.2_ext_1.time
+]0;root@lvm:~[root@lvm ~]# 
+]0;root@lvm:~[root@lvm ~]# 
+]0;root@lvm:~[root@lvm ~]# 
+]0;root@lvm:~[root@lvm ~]# date
+Thu Feb 21 13:57:51 UTC 2019
+]0;root@lvm:~[root@lvm ~]# ды[K[Kpvs
+  PV         VG          Fmt  Attr PSize    PFree 
+  /dev/sda3  VolGroup00  lvm2 a--   <38.97g 27.34g
+  /dev/sdc   otus_vg_var lvm2 a--    <2.00g  1.06g
+  /dev/sdd   otus_vg_var lvm2 a--  1020.00m 64.00m
+  /dev/sde               lvm2 ---     1.00g  1.00g
+]0;root@lvm:~[root@lvm ~]# vgs
+  VG          #PV #LV #SN Attr   VSize   VFree 
+  VolGroup00    1   3   1 wz--n- <38.97g 27.34g
+  otus_vg_var   2   1   0 wz--n-   2.99g  1.12g
+]0;root@lvm:~[root@lvm ~]# lsblk 
+NAME                            MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda                               8:0    0   40G  0 disk 
+├─sda1                            8:1    0    1M  0 part 
+├─sda2                            8:2    0    1G  0 part /boot
+└─sda3                            8:3    0   39G  0 part 
+  ├─VolGroup00-LogVol00         253:0    0    8G  0 lvm  /
+  ├─VolGroup00-LogVol01         253:1    0  1.5G  0 lvm  [SWAP]
+  ├─VolGroup00-LogVol_home-real 253:8    0    2G  0 lvm  
+  │ ├─VolGroup00-LogVol_home    253:2    0    2G  0 lvm  /home
+  │ └─VolGroup00-snap_home      253:10   0    2G  0 lvm  
+  └─VolGroup00-snap_home-cow    253:9    0  128M  0 lvm  
+    └─VolGroup00-snap_home      253:10   0    2G  0 lvm  
+sdb                               8:16   0   10G  0 disk 
+sdc                               8:32   0    2G  0 disk 
+├─otus_vg_var-lv_var_rmeta_0    253:3    0    4M  0 lvm  
+│ └─otus_vg_var-lv_var          253:7    0  952M  0 lvm  /var
+└─otus_vg_var-lv_var_rimage_0   253:4    0  952M  0 lvm  
+  └─otus_vg_var-lv_var          253:7    0  952M  0 lvm  /var
+sdd                               8:48   0    1G  0 disk 
+├─otus_vg_var-lv_var_rmeta_1    253:5    0    4M  0 lvm  
+│ └─otus_vg_var-lv_var          253:7    0  952M  0 lvm  /var
+└─otus_vg_var-lv_var_rimage_1   253:6    0  952M  0 lvm  
+  └─otus_vg_var-lv_var          253:7    0  952M  0 lvm  /var
+sde                               8:64   0    1G  0 disk 
+]0;root@lvm:~[root@lvm ~]# ls -l /opt/
+total 0
+]0;root@lvm:~[root@lvm ~]# pvcreate /dev/sdb
+  Physical volume "/dev/sdb" successfully created.
+]0;root@lvm:~[root@lvm ~]# vgr[Kcreate vg_opt /dev/sd{}b},}e}
+  Volume group "vg_opt" successfully created
+]0;root@lvm:~[root@lvm ~]# vgs
+  VG          #PV #LV #SN Attr   VSize   VFree 
+  VolGroup00    1   3   1 wz--n- <38.97g 27.34g
+  otus_vg_var   2   1   0 wz--n-   2.99g  1.12g
+  vg_opt        2   0   0 wz--n-  10.99g 10.99g
+]0;root@lvm:~[root@lvm ~]# vn[Kgre
+vgreduce  vgremove  vgrename  
+[root@lvm ~]# vgrema[K[Kname vh[Kg_opt vg_opt [1@o[1@t[1@u[1@s[1@_
+  Volume group "vg_opt" successfully renamed to "otus_vg_opt"
+]0;root@lvm:~[root@lvm ~]# vgs
+  VG          #PV #LV #SN Attr   VSize   VFree 
+  VolGroup00    1   3   1 wz--n- <38.97g 27.34g
+  otus_vg_opt   2   0   0 wz--n-  10.99g 10.99g
+  otus_vg_var   2   1   0 wz--n-   2.99g  1.12g
+]0;root@lvm:~[root@lvm ~]# vdir [K[K[K[Kgdisplay [Klsblk 
+NAME                            MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda                               8:0    0   40G  0 disk 
+├─sda1                            8:1    0    1M  0 part 
+├─sda2                            8:2    0    1G  0 part /boot
+└─sda3                            8:3    0   39G  0 part 
+  ├─VolGroup00-LogVol00         253:0    0    8G  0 lvm  /
+  ├─VolGroup00-LogVol01         253:1    0  1.5G  0 lvm  [SWAP]
+  ├─VolGroup00-LogVol_home-real 253:8    0    2G  0 lvm  
+  │ ├─VolGroup00-LogVol_home    253:2    0    2G  0 lvm  /home
+  │ └─VolGroup00-snap_home      253:10   0    2G  0 lvm  
+  └─VolGroup00-snap_home-cow    253:9    0  128M  0 lvm  
+    └─VolGroup00-snap_home      253:10   0    2G  0 lvm  
+sdb                               8:16   0   10G  0 disk 
+sdc                               8:32   0    2G  0 disk 
+├─otus_vg_var-lv_var_rmeta_0    253:3    0    4M  0 lvm  
+│ └─otus_vg_var-lv_var          253:7    0  952M  0 lvm  /var
+└─otus_vg_var-lv_var_rimage_0   253:4    0  952M  0 lvm  
+  └─otus_vg_var-lv_var          253:7    0  952M  0 lvm  /var
+sdd                               8:48   0    1G  0 disk 
+├─otus_vg_var-lv_var_rmeta_1    253:5    0    4M  0 lvm  
+│ └─otus_vg_var-lv_var          253:7    0  952M  0 lvm  /var
+└─otus_vg_var-lv_var_rimage_1   253:6    0  952M  0 lvm  
+  └─otus_vg_var-lv_var          253:7    0  952M  0 lvm  /var
+sde                               8:64   0    1G  0 disk 
+]0;root@lvm:~[root@lvm ~]# lvcreate --name [K[Klvs
+  LV          VG          Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  LogVol00    VolGroup00  -wi-ao----   8.00g                                                    
+  LogVol01    VolGroup00  -wi-ao----   1.50g                                                    
+  LogVol_home VolGroup00  Owi-aos---   2.00g                                                    
+  lv_var      otus_vg_var rwi-aor--- 952.00m                                    100.00          
+]0;root@lvm:~[root@lvm ~]# lvcreate --name lv_opt_master --extents 60%FREE otus_vg_opt
+WARNING: xfs signature detected on /dev/otus_vg_opt/lv_opt_master at offset 0. Wipe it? [y/n]: y y
+  Wiping xfs signature on /dev/otus_vg_opt/lv_opt_master.
+  Logical volume "lv_opt_master" created.
+]0;root@lvm:~[root@lvm ~]# lvs
+  LV            VG          Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  LogVol00      VolGroup00  -wi-ao----   8.00g                                                    
+  LogVol01      VolGroup00  -wi-ao----   1.50g                                                    
+  LogVol_home   VolGroup00  Owi-aos---   2.00g                                                    
+  lv_opt_master otus_vg_opt -wi-a-----   6.59g                                                    
+  lv_var        otus_vg_var rwi-aor--- 952.00m                                    100.00          
+]0;root@lvm:~[root@lvm ~]# lsblk 
+NAME                            MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda                               8:0    0   40G  0 disk 
+├─sda1                            8:1    0    1M  0 part 
+├─sda2                            8:2    0    1G  0 part /boot
+└─sda3                            8:3    0   39G  0 part 
+  ├─VolGroup00-LogVol00         253:0    0    8G  0 lvm  /
+  ├─VolGroup00-LogVol01         253:1    0  1.5G  0 lvm  [SWAP]
+  ├─VolGroup00-LogVol_home-real 253:8    0    2G  0 lvm  
+  │ ├─VolGroup00-LogVol_home    253:2    0    2G  0 lvm  /home
+  │ └─VolGroup00-snap_home      253:10   0    2G  0 lvm  
+  └─VolGroup00-snap_home-cow    253:9    0  128M  0 lvm  
+    └─VolGroup00-snap_home      253:10   0    2G  0 lvm  
+sdb                               8:16   0   10G  0 disk 
+└─otus_vg_opt-lv_opt_master     253:11   0  6.6G  0 lvm  
+sdc                               8:32   0    2G  0 disk 
+├─otus_vg_var-lv_var_rmeta_0    253:3    0    4M  0 lvm  
+│ └─otus_vg_var-lv_var          253:7    0  952M  0 lvm  /var
+└─otus_vg_var-lv_var_rimage_0   253:4    0  952M  0 lvm  
+  └─otus_vg_var-lv_var          253:7    0  952M  0 lvm  /var
+sdd                               8:48   0    1G  0 disk 
+├─otus_vg_var-lv_var_rmeta_1    253:5    0    4M  0 lvm  
+│ └─otus_vg_var-lv_var          253:7    0  952M  0 lvm  /var
+└─otus_vg_var-lv_var_rimage_1   253:6    0  952M  0 lvm  
+  └─otus_vg_var-lv_var          253:7    0  952M  0 lvm  /var
+sde                               8:64   0    1G  0 disk 
+]0;root@lvm:~[root@lvm ~]# lvcreate --name m[Klv_opt_short --size 1GB otus_vg_
+otus_vg_opt  otus_vg_var  
+[root@lvm ~]# lvcreate --name lv_opt_short --size 1GB otus_vg_va[K[Kp[Kopt 
+  Logical volume "lv_opt_short" created.
+]0;root@lvm:~[root@lvm ~]# ls [K[K[Kl[Klvs
+  LV            VG          Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  LogVol00      VolGroup00  -wi-ao----   8.00g                                                    
+  LogVol01      VolGroup00  -wi-ao----   1.50g                                                    
+  LogVol_home   VolGroup00  Owi-aos---   2.00g                                                    
+  lv_opt_master otus_vg_opt -wi-a-----   6.59g                                                    
+  lv_opt_short  otus_vg_opt -wi-a-----   1.00g                                                    
+  lv_var        otus_vg_var rwi-aor--- 952.00m                                    100.00          
+]0;root@lvm:~[root@lvm ~]# vgs
+  VG          #PV #LV #SN Attr   VSize   VFree 
+  VolGroup00    1   3   1 wz--n- <38.97g 27.34g
+  otus_vg_opt   2   2   0 wz--n-  10.99g <3.40g
+  otus_vg_var   2   1   0 wz--n-   2.99g  1.12g
+]0;root@lvm:~[root@lvm ~]# mkfs
+mkfs         mkfs.btrfs   mkfs.cramfs  mkfs.ext2    mkfs.ext3    mkfs.ext4    mkfs.minix   mkfs.xfs
+[root@lvm ~]# mkfs.btrfs /dev/
+Display all 157 possibilities? (y or n)
+[root@lvm ~]# mkfs.btrfs /dev/o
+oldmem       otus_vg_opt/ otus_vg_var/ 
+[root@lvm ~]# mkfs.btrfs /dev/otus_vg_opt/lv_opt_
+lv_opt_master  lv_opt_short   
+[root@lvm ~]# mkfs.btrfs /dev/otus_vg_opt/lv_opt_master 
+btrfs-progs v4.9.1
+See http://btrfs.wiki.kernel.org for more information.
+
+Label:              (null)
+UUID:               9787b8e8-0509-48ce-952a-1d7ecd9dc2b6
+Node size:          16384
+Sector size:        4096
+Filesystem size:    6.59GiB
+Block group profiles:
+  Data:             single            8.00MiB
+  Metadata:         DUP             337.56MiB
+  System:           DUP               8.00MiB
+SSD detected:       no
+Incompat features:  extref, skinny-metadata
+Number of devices:  1
+Devices:
+   ID        SIZE  PATH
+    1     6.59GiB  /dev/otus_vg_opt/lv_opt_master
+
+]0;root@lvm:~[root@lvm ~]# mkfs
+mkfs         mkfs.btrfs   mkfs.cramfs  mkfs.ext2    mkfs.ext3    mkfs.ext4    mkfs.minix   mkfs.xfs
+[root@lvm ~]# mkfs.ext4 /dev/otus_vg_opt/lv_opt_short 
+mke2fs 1.42.9 (28-Dec-2013)
+Filesystem label=
+OS type: Linux
+Block size=4096 (log=2)
+Fragment size=4096 (log=2)
+Stride=0 blocks, Stripe width=0 blocks
+65536 inodes, 262144 blocks
+13107 blocks (5.00%) reserved for the super user
+First data block=0
+Maximum filesystem blocks=268435456
+8 block groups
+32768 blocks per group, 32768 fragments per group
+8192 inodes per group
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376
+
+Allocating group tables: 0/8   done                            
+Writing inode tables: 0/8   done                            
+Creating journal (8192 blocks): done
+Writing superblocks and filesystem accounting information: 0/8   done
+
+]0;root@lvm:~[root@lvm ~]# lsblk 
+NAME                            MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda                               8:0    0   40G  0 disk 
+├─sda1                            8:1    0    1M  0 part 
+├─sda2                            8:2    0    1G  0 part /boot
+└─sda3                            8:3    0   39G  0 part 
+  ├─VolGroup00-LogVol00         253:0    0    8G  0 lvm  /
+  ├─VolGroup00-LogVol01         253:1    0  1.5G  0 lvm  [SWAP]
+  ├─VolGroup00-LogVol_home-real 253:8    0    2G  0 lvm  
+  │ ├─VolGroup00-LogVol_home    253:2    0    2G  0 lvm  /home
+  │ └─VolGroup00-snap_home      253:10   0    2G  0 lvm  
+  └─VolGroup00-snap_home-cow    253:9    0  128M  0 lvm  
+    └─VolGroup00-snap_home      253:10   0    2G  0 lvm  
+sdb                               8:16   0   10G  0 disk 
+├─otus_vg_opt-lv_opt_master     253:11   0  6.6G  0 lvm  
+└─otus_vg_opt-lv_opt_short      253:12   0    1G  0 lvm  
+sdc                               8:32   0    2G  0 disk 
+├─otus_vg_var-lv_var_rmeta_0    253:3    0    4M  0 lvm  
+│ └─otus_vg_var-lv_var          253:7    0  952M  0 lvm  /var
+└─otus_vg_var-lv_var_rimage_0   253:4    0  952M  0 lvm  
+  └─otus_vg_var-lv_var          253:7    0  952M  0 lvm  /var
+sdd                               8:48   0    1G  0 disk 
+├─otus_vg_var-lv_var_rmeta_1    253:5    0    4M  0 lvm  
+│ └─otus_vg_var-lv_var          253:7    0  952M  0 lvm  /var
+└─otus_vg_var-lv_var_rimage_1   253:6    0  952M  0 lvm  
+  └─otus_vg_var-lv_var          253:7    0  952M  0 lvm  /var
+sde                               8:64   0    1G  0 disk 
+]0;root@lvm:~[root@lvm ~]# lsblk -f
+NAME                            FSTYPE      LABEL UUID                                   MOUNTPOINT
+sda                                                                                      
+├─sda1                                                                                   
+├─sda2                          xfs               570897ca-e759-4c81-90cf-389da6eee4cc   /boot
+└─sda3                          LVM2_member       vrrtbx-g480-HcJI-5wLn-4aOf-Olld-rC03AY 
+  ├─VolGroup00-LogVol00         xfs               fab0b0d0-ad40-4efc-878e-a3a12839e895   /
+  ├─VolGroup00-LogVol01         swap              c39c5bed-f37c-4263-bee8-aeb6a6659d7b   [SWAP]
+  ├─VolGroup00-LogVol_home-real                                                          
+  │ ├─VolGroup00-LogVol_home    xfs               abca8ab6-acd0-41db-aa86-2e7e01d431bd   /home
+  │ └─VolGroup00-snap_home      xfs               abca8ab6-acd0-41db-aa86-2e7e01d431bd   
+  └─VolGroup00-snap_home-cow                                                             
+    └─VolGroup00-snap_home      xfs               abca8ab6-acd0-41db-aa86-2e7e01d431bd   
+sdb                             LVM2_member       NWAYFu-4SU4-Sj4V-whXy-7n4A-er3e-wRKwao 
+├─otus_vg_opt-lv_opt_master     btrfs             9787b8e8-0509-48ce-952a-1d7ecd9dc2b6   
+└─otus_vg_opt-lv_opt_short      ext4              b519be00-ec1d-412d-81b0-6cb7e70ccb11   
+sdc                             LVM2_member       6f2h7D-shje-2euJ-fpZl-hjkW-aEXi-mzUwmE 
+├─otus_vg_var-lv_var_rmeta_0                                                             
+│ └─otus_vg_var-lv_var          ext4              f8115b60-b331-4549-b4a0-add2b399c07e   /var
+└─otus_vg_var-lv_var_rimage_0                                                            
+  └─otus_vg_var-lv_var          ext4              f8115b60-b331-4549-b4a0-add2b399c07e   /var
+sdd                             LVM2_member       eZQ5bH-GypI-UdmV-pmO6-5lOC-HJ0F-RWvNyz 
+├─otus_vg_var-lv_var_rmeta_1                                                             
+│ └─otus_vg_var-lv_var          ext4              f8115b60-b331-4549-b4a0-add2b399c07e   /var
+└─otus_vg_var-lv_var_rimage_1                                                            
+  └─otus_vg_var-lv_var          ext4              f8115b60-b331-4549-b4a0-add2b399c07e   /var
+sde                             LVM2_member       3oT688-N23X-dho9-jMuv-DPE1-OU3r-K7uE1A 
+]0;root@lvm:~[root@lvm ~]# ls -l /.[Kopt/
+total 0
+]0;root@lvm:~[root@lvm ~]# ls -l /opt/[K[K[Kmount /dev/otus_vg_opt/ /opt/[K[K[K[K[K[Klv_opt_master /opt/
+]0;root@lvm:~[root@lvm ~]# ls -l [K[K[K[K[K[Kls -l /opt/
+total 0
+]0;root@lvm:~[root@lvm ~]# df -h
+Filesystem                             Size  Used Avail Use% Mounted on
+/dev/mapper/VolGroup00-LogVol00        8.0G  1.1G  7.0G  13% /
+devtmpfs                               110M     0  110M   0% /dev
+tmpfs                                  118M     0  118M   0% /dev/shm
+tmpfs                                  118M  8.5M  110M   8% /run
+tmpfs                                  118M     0  118M   0% /sys/fs/cgroup
+/dev/sda2                             1014M   86M  929M   9% /boot
+/dev/mapper/otus_vg_var-lv_var         922M  315M  543M  37% /var
+/dev/mapper/VolGroup00-LogVol_home     2.0G   33M  2.0G   2% /home
+/dev/mapper/otus_vg_opt-lv_opt_master  6.6G   17M  6.0G   1% /opt
+]0;root@lvm:~[root@lvm ~]# mkdir /opt/test[K[K[K[Ktunder_in_pra[K[Karadise
+]0;root@lvm:~[root@lvm ~]# [K[root@lvm ~]# [K[root@lvm ~]# moui[Knt /dev/otus_vg_opt/lv_opt_short /opt/tunder_in_paradise/[K
+]0;root@lvm:~[root@lvm ~]# blkid 
+/dev/sda2: UUID="570897ca-e759-4c81-90cf-389da6eee4cc" TYPE="xfs" 
+/dev/sda3: UUID="vrrtbx-g480-HcJI-5wLn-4aOf-Olld-rC03AY" TYPE="LVM2_member" 
+/dev/sdc: UUID="6f2h7D-shje-2euJ-fpZl-hjkW-aEXi-mzUwmE" TYPE="LVM2_member" 
+/dev/sdd: UUID="eZQ5bH-GypI-UdmV-pmO6-5lOC-HJ0F-RWvNyz" TYPE="LVM2_member" 
+/dev/mapper/VolGroup00-LogVol00: UUID="fab0b0d0-ad40-4efc-878e-a3a12839e895" TYPE="xfs" 
+/dev/mapper/VolGroup00-LogVol01: UUID="c39c5bed-f37c-4263-bee8-aeb6a6659d7b" TYPE="swap" 
+/dev/mapper/otus_vg_var-lv_var_rimage_0: UUID="f8115b60-b331-4549-b4a0-add2b399c07e" TYPE="ext4" 
+/dev/mapper/otus_vg_var-lv_var_rimage_1: UUID="f8115b60-b331-4549-b4a0-add2b399c07e" TYPE="ext4" 
+/dev/mapper/otus_vg_var-lv_var: UUID="f8115b60-b331-4549-b4a0-add2b399c07e" TYPE="ext4" 
+/dev/mapper/VolGroup00-LogVol_home: UUID="abca8ab6-acd0-41db-aa86-2e7e01d431bd" TYPE="xfs" 
+/dev/sdb: UUID="NWAYFu-4SU4-Sj4V-whXy-7n4A-er3e-wRKwao" TYPE="LVM2_member" 
+/dev/sde: UUID="3oT688-N23X-dho9-jMuv-DPE1-OU3r-K7uE1A" TYPE="LVM2_member" 
+/dev/mapper/VolGroup00-snap_home: UUID="abca8ab6-acd0-41db-aa86-2e7e01d431bd" TYPE="xfs" 
+/dev/mapper/otus_vg_opt-lv_opt_master: UUID="9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" 
+/dev/mapper/otus_vg_opt-lv_opt_short: UUID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4" 
+]0;root@lvm:~[root@lvm ~]# vim /etc/fstab 
+-bash: vim: command not found
+]0;root@lvm:~[root@lvm ~]# vim /etc/fstab [C[C[1P
+[?1049h[?1h=[1;52r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[52;1H"/etc/fstab" 14L, 614C[2;1H#
+# /etc/fstab
+# Created by anaconda on Sat May 12 18:50:26 2018
+#
+# Accessible filesystems, by reference, are maintained under '/dev/disk'
+# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info
+#
+/dev/mapper/VolGroup00-LogVol00 /[23Cxfs     defaults[8C0 0
+UUID=570897ca-e759-4c81-90cf-389da6eee4cc /boot[19Cxfs     defaults[8C0 0
+/dev/mapper/VolGroup00-LogVol01 swap[20Cswap    defaults[8C0 0
+UUID=f8115b60-b331-4549-b4a0-add2b399c07e /var[10Cext4    defaults[8C0 0
+UUID=abca8ab6-acd0-41db-aa86-2e7e01d431bd /home[9Cxfs     defaults[8C0 0
+
+[94m~                                                                                                                                                                                                                  [16;1H~                                                                                                                                                                                                                  [17;1H~                                                                                                                                                                                                                  [18;1H~                                                                                                                                                                                                                  [19;1H~                                                                                                                                                                                                                  [20;1H~                                                                                                                                                                                                                  [21;1H~                                                                                                                                                                                                                  [22;1H~                                                                                                                                                                                                                  [23;1H~                                                                                                                                                                                                                  [24;1H~                                                                                                                                                                                                                  [25;1H~                                                                                                                                                                                                                  [26;1H~                                                                                                                                                                                                                  [27;1H~                                                                                                                                                                                                                  [28;1H~                                                                                                                                                                                                                  [29;1H~                                                                                                                                                                                                                  [30;1H~                                                                                                                                                                                                                  [31;1H~                                                                                                                                                                                                                  [32;1H~                                                                                                                                                                                                                  [33;1H~                                                                                                                                                                                                                  [34;1H~                                                                                                                                                                                                                  [35;1H~                                                                                                                                                                                                                  [36;1H~                                                                                                                                                                                                                  [37;1H~                                                                                                                                                                                                                  [38;1H~                                                                                                                                                                                                                  [39;1H~                                                                                                                                                                                                                  [40;1H~                                                                                                                                                                                                                  [41;1H~                                                                                                                                                                                                                  [42;1H~                                                                                                                                                                                                                  [43;1H~                                                                                                                                                                                                                  [44;1H~                                                                                                                                                                                                                  [45;1H~                                                                                                                                                                                                                  [46;1H~                                                                                                                                                                                                                  [47;1H~                                                                                                                                                                                                                  [48;1H~                                                                                                                                                                                                                  [49;1H~                                                                                                                                                                                                                  [50;1H~                                                                                                                                                                                                                  [51;1H~                                                                                                                                                                                                                  [1;1H[?12l[?25h[14;1H[?25l[m[52;1H[1m-- INSERT --[m[52;14H[K[14;1H[?12l[?25h[?25l[15;1H[K[15;1H[?12l[?25h[?25ldev/mapper/otus_vg_opt-lv_opt_master: UUID="9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs"
+/dev/mapper/otus_vg_opt-lv_opt_short: UUID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;93H[K[16;93H[?12l[?25h[15;93H[14;1H[15;93H[?25lev/mapper/otus_vg_opt-lv_opt_master: UUID="9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [?12l[?25h[?25lv/mapper/otus_vg_opt-lv_opt_master: UUID="9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [?12l[?25h[?25l/mapper/otus_vg_opt-lv_opt_master: UUID="9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [?12l[?25h[?25lmapper/otus_vg_opt-lv_opt_master: UUID="9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [?12l[?25h[?25lapper/otus_vg_opt-lv_opt_master: UUID="9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [?12l[?25h[?25lpper/otus_vg_opt-lv_opt_master: UUID="9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [?12l[?25h[?25lper/otus_vg_opt-lv_opt_master: UUID="9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [?12l[?25h[?25ler/otus_vg_opt-lv_opt_master: UUID="9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [?12l[?25h[?25lr/otus_vg_opt-lv_opt_master: UUID="9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [?12l[?25h[?25l/otus_vg_opt-lv_opt_master: UUID="9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [?12l[?25h[?25lotus_vg_opt-lv_opt_master: UUID="9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [?12l[?25h[?25ltus_vg_opt-lv_opt_master: UUID="9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [?12l[?25h[?25lus_vg_opt-lv_opt_master: UUID="9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [?12l[?25h[?25ls_vg_opt-lv_opt_master: UUID="9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [?12l[?25h[?25l_vg_opt-lv_opt_master: UUID="9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [?12l[?25h[?25lvg_opt-lv_opt_master: UUID="9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [?12l[?25h[?25lg_opt-lv_opt_master: UUID="9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [?12l[?25h[?25l_opt-lv_opt_master: UUID="9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [?12l[?25h[?25lopt-lv_opt_master: UUID="9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [?12l[?25h[?25lpt-lv_opt_master: UUID="9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [?12l[?25h[?25lt-lv_opt_master: UUID="9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [?12l[?25h[?25l-lv_opt_master: UUID="9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [?12l[?25h[?25llv_opt_master: UUID="9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [?12l[?25h[?25lv_opt_master: UUID="9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [?12l[?25h[?25l_opt_master: UUID="9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [?12l[?25h[?25lopt_master: UUID="9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [?12l[?25h[?25lpt_master: UUID="9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [?12l[?25h[?25lt_master: UUID="9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [?12l[?25h[?25l_master: UUID="9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [?12l[?25h[?25lmaster: UUID="9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [?12l[?25h[?25laster: UUID="9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [?12l[?25h[?25lster: UUID="9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [?12l[?25h[?25lter: UUID="9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [?12l[?25h[?25ler: UUID="9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [?12l[?25h[?25lr: UUID="9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [?12l[?25h[?25l: UUID="9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [?12l[?25h[?25l UUID="9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [?12l[?25h[?25lUUID="9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [?12l[?25hUUID="[?25l9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" UUID=[?12l[?25h9787b8e8-0509-48ce-952a-1d7ecd9dc2b6" U[?25l UUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [15;42H[?12l[?25h[?25lUUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [15;42H[?12l[?25h[?25lUID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [15;42H[?12l[?25h[?25lID_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [15;42H[?12l[?25h[?25lD_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [15;42H[?12l[?25h[?25l_SUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [15;42H[?12l[?25h[?25lSUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [15;42H[?12l[?25h[?25lUB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [15;42H[?12l[?25h[?25lB="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [15;42H[?12l[?25h[?25l="304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [15;42H[?12l[?25h[?25l"304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [15;42H[?12l[?25h[?25l304af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [15;42H[?12l[?25h[?25l04af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [15;42H[?12l[?25h[?25l4af1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [15;42H[?12l[?25h[?25laf1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [15;42H[?12l[?25h[?25lf1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [15;42H[?12l[?25h[?25l1d3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [15;42H[?12l[?25h[?25ld3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [15;42H[?12l[?25h[?25l3-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [15;42H[?12l[?25h[?25l-5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [15;42H[?12l[?25h[?25l5903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [15;42H[?12l[?25h[?25l903-4e8b-95e7-e2304878c69c" TYPE="btrfs" [15;42H[?12l[?25h[?25l03-4e8b-95e7-e2304878c69c" TYPE="btrfs" [15;42H[?12l[?25h[?25l3-4e8b-95e7-e2304878c69c" TYPE="btrfs" [15;42H[?12l[?25h[?25l-4e8b-95e7-e2304878c69c" TYPE="btrfs" [15;42H[?12l[?25h[?25l4e8b-95e7-e2304878c69c" TYPE="btrfs" [15;42H[?12l[?25h[?25le8b-95e7-e2304878c69c" TYPE="btrfs" [15;42H[?12l[?25h[?25l8b-95e7-e2304878c69c" TYPE="btrfs" [15;42H[?12l[?25h[?25lb-95e7-e2304878c69c" TYPE="btrfs" [15;42H[?12l[?25h[?25l-95e7-e2304878c69c" TYPE="btrfs" [15;42H[?12l[?25h[?25l95e7-e2304878c69c" TYPE="btrfs" [15;42H[?12l[?25h[?25l5e7-e2304878c69c" TYPE="btrfs" [15;42H[?12l[?25h[?25le7-e2304878c69c" TYPE="btrfs" [15;42H[?12l[?25h[?25l7-e2304878c69c" TYPE="btrfs" [15;42H[?12l[?25h[?25l-e2304878c69c" TYPE="btrfs" [15;42H[?12l[?25h[?25le2304878c69c" TYPE="btrfs" [15;42H[?12l[?25h[?25l2304878c69c" TYPE="btrfs" [15;42H[?12l[?25h[?25l304878c69c" TYPE="btrfs" [15;42H[?12l[?25h[?25l 304878c69c" TYPE="btrfs"[15;43H[?12l[?25h[?25l/304878c69c" TYPE="btrfs"[15;44H[?12l[?25h[?25lo304878c69c" TYPE="btrfs"[15;45H[?12l[?25h[?25lp304878c69c" TYPE="btrfs"[15;46H[?12l[?25h[?25lt304878c69c" TYPE="btrfs"[15;47H[?12l[?25h[?25l  304878c69c" TYPE="btrfs"[15;49H[?12l[?25h[?25l        304878c69c" TYPE="btrfs"[15;57H[?12l[?25h[?25l04878c69c" TYPE="btrfs" [15;57H[?12l[?25h[?25l4878c69c" TYPE="btrfs" [15;57H[?12l[?25h[?25l878c69c" TYPE="btrfs" [15;57H[?12l[?25h[?25l78c69c" TYPE="btrfs" [15;57H[?12l[?25h[?25l8c69c" TYPE="btrfs" [15;57H[?12l[?25h[?25lc69c" TYPE="btrfs" [15;57H[?12l[?25h[?25l69c" TYPE="btrfs" [15;57H[?12l[?25h[?25l9c" TYPE="btrfs" [15;57H[?12l[?25h[?25lc" TYPE="btrfs" [15;57H[?12l[?25h[?25l" TYPE="btrfs" [15;57H[?12l[?25h[?25l TYPE="btrfs" [15;57H[?12l[?25h[?25lTYPE="btrfs" [15;57H[?12l[?25h[?25lYPE="btrfs" [15;57H[?12l[?25h[?25lPE="btrfs" [15;57H[?12l[?25h[?25lE="btrfs" [15;57H[?12l[?25h[?25l="btrfs" [15;57H[?12l[?25h[?25l"btrfs" [15;57H[?12l[?25h[?25lbtrfs" [15;57H[?12l[?25hbtrfs[?25l [?12l[?25h[?25l   [?12l[?25h[?25ld[?12l[?25h[?25le[?12l[?25h[?25lf[?12l[?25h[?25la[?12l[?25h[?25lu[?12l[?25h[?25ll[?12l[?25h[?25lt[?12l[?25h[?25ls[?12l[?25h[?25l[8C[?12l[?25h[?25l0[?12l[?25h[?25l [?12l[?25h[?25l0[?12l[?25h[16;84H[?25ldev/mapper/otus_vg_opt-lv_opt_short: UUID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;92H[K[16;1H[?12l[?25h[?25lev/mapper/otus_vg_opt-lv_opt_short: UUID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;91H[K[16;1H[?12l[?25h[?25lv/mapper/otus_vg_opt-lv_opt_short: UUID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;90H[K[16;1H[?12l[?25h[?25l/mapper/otus_vg_opt-lv_opt_short: UUID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;89H[K[16;1H[?12l[?25h[?25lmapper/otus_vg_opt-lv_opt_short: UUID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;88H[K[16;1H[?12l[?25h[?25lapper/otus_vg_opt-lv_opt_short: UUID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;87H[K[16;1H[?12l[?25h[?25lpper/otus_vg_opt-lv_opt_short: UUID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;86H[K[16;1H[?12l[?25h[?25lper/otus_vg_opt-lv_opt_short: UUID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;85H[K[16;1H[?12l[?25h[?25ler/otus_vg_opt-lv_opt_short: UUID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;84H[K[16;1H[?12l[?25h[?25lr/otus_vg_opt-lv_opt_short: UUID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;83H[K[16;1H[?12l[?25h[?25l/otus_vg_opt-lv_opt_short: UUID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;82H[K[16;1H[?12l[?25h[?25lotus_vg_opt-lv_opt_short: UUID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;81H[K[16;1H[?12l[?25h[?25ltus_vg_opt-lv_opt_short: UUID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;80H[K[16;1H[?12l[?25h[?25lus_vg_opt-lv_opt_short: UUID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;79H[K[16;1H[?12l[?25h[?25ls_vg_opt-lv_opt_short: UUID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;78H[K[16;1H[?12l[?25h[?25l_vg_opt-lv_opt_short: UUID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;77H[K[16;1H[?12l[?25h[?25lvg_opt-lv_opt_short: UUID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;76H[K[16;1H[?12l[?25h[?25lg_opt-lv_opt_short: UUID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;75H[K[16;1H[?12l[?25h[?25l_opt-lv_opt_short: UUID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;74H[K[16;1H[?12l[?25h[?25lopt-lv_opt_short: UUID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;73H[K[16;1H[?12l[?25h[?25lpt-lv_opt_short: UUID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;72H[K[16;1H[?12l[?25h[?25lt-lv_opt_short: UUID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;71H[K[16;1H[?12l[?25h[?25l-lv_opt_short: UUID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;70H[K[16;1H[?12l[?25h[?25llv_opt_short: UUID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;69H[K[16;1H[?12l[?25h[?25lv_opt_short: UUID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;68H[K[16;1H[?12l[?25h[?25l_opt_short: UUID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;67H[K[16;1H[?12l[?25h[?25lopt_short: UUID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;66H[K[16;1H[?12l[?25h[?25lpt_short: UUID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;65H[K[16;1H[?12l[?25h[?25lt_short: UUID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;64H[K[16;1H[?12l[?25h[?25l_short: UUID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;63H[K[16;1H[?12l[?25h[?25lshort: UUID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;62H[K[16;1H[?12l[?25h[?25lhort: UUID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;61H[K[16;1H[?12l[?25h[?25lort: UUID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;60H[K[16;1H[?12l[?25h[?25lrt: UUID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;59H[K[16;1H[?12l[?25h[?25lt: UUID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;58H[K[16;1H[?12l[?25h[?25l: UUID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;57H[K[16;1H[?12l[?25h[?25l UUID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;56H[K[16;1H[?12l[?25h[?25lUUID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;55H[K[16;1H[?12l[?25h[?25lUID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;54H[K[16;1H[?12l[?25h[?25lID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;53H[K[16;1H[?12l[?25h[?25lD="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;52H[K[16;1H[?12l[?25h[?25lUD="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4U[?12l[?25h[?25lUD="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4UU[?12l[?25h[?25lID="b519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4UUI[?12l[?25hD=[?25lb519be00-ec1d-412d-81b0-6cb7e70ccb11" TYPE="ext4[16;54H[K[16;6H[?12l[?25hb519be00-ec1d-412d-81b0-6cb7e70ccb11[?25l TYPE="ext4[16;53H[K[16;42H[?12l[?25h[?25l  TYPE="ext4[16;43H[?12l[?25h[?25l/ TYPE="ext4[16;44H[?12l[?25h[?25lo TYPE="ext4[16;45H[?12l[?25h[?25lp TYPE="ext4[16;46H[?12l[?25h[?25lt TYPE="ext4[16;47H[?12l[?25h[?25l   TYPE="ext4[16;49H[?12l[?25h[?25l         TYPE="ext4[16;57H[?12l[?25h[?25lTYPE="ext4[16;67H[K[16;57H[?12l[?25h[?25lYPE="ext4[16;66H[K[16;57H[?12l[?25h[16;49H[?25l/[?12l[?25h[?25lt[8C        YPE="ext4[16;49H[?12l[?25h[?25lh[?12l[?25h[?25lu[?12l[?25h[?25ln[?12l[?25h[?25ld[?12l[?25h[?25le[?12l[?25h[?25lr[?12l[?25h[?25l_[?12l[?25h[?25li[8C        YPE="ext4[16;57H[?12l[?25h[?25ln[?12l[?25h[?25l_[?12l[?25h[?25lp[?12l[?25h[?25la[?12l[?25h[?25lr[?12l[?25h[?25la[?12l[?25h[?25ld[?12l[?25h[?25li[8C        YPE="ext4[16;65H[?12l[?25h[?25ls[?12l[?25h[?25le[?12l[?25h[?25l      YPE="ext4[16;82H[K[16;67H[?12l[?25h[?25lYPE="ext4[16;76H[K[16;67H[?12l[?25h[?25lPE="ext4[16;75H[K[16;67H[?12l[?25h[?25lE="ext4[16;74H[K[16;67H[?12l[?25h[?25l="ext4[16;73H[K[16;67H[?12l[?25h[?25l"ext4[16;72H[K[16;67H[?12l[?25h[?25lext4[16;71H[K[16;67H[?12l[?25h[?25l      ext4[?12l[?25hext4[?25l    [?12l[?25h[?25ld[?12l[?25h[?25le[?12l[?25h[?25lf[?12l[?25h[?25la[?12l[?25h[?25lu[?12l[?25h[?25ll[?12l[?25h[?25lt[?12l[?25h[?25ls[?12l[?25h[?25l [?12l[?25h[?25l[?12l[?25h[?25l[8C[?12l[?25h[?25l0[?12l[?25h[?25l [?12l[?25h[?25l0[?12l[?25h[52;1H[K[16;99H[?25l[?12l[?25h[?25l[52;1H:[?12l[?25hx[?25l"/etc/fstab" 16L, 767C written
+[?1l>[?12l[?25h[?1049l]0;root@lvm:~[root@lvm ~]# ls -l /opt/
+total 4
+drwxr-xr-x. 3 root root 4096 Feb 21 14:07 [0m[38;5;27mtunder_in_paradise[0m
+]0;root@lvm:~[root@lvm ~]# grep thunde /etc/fsts[K[Ktab 
+UUID=b519be00-ec1d-412d-81b0-6cb7e70ccb11 /opt/[01;31m[Kthunde[m[Kr_in_paradise	ext4	defaults	0 0
+]0;root@lvm:~[root@lvm ~]# 
+]0;root@lvm:~[root@lvm ~]# сфе .уе[K[Kcat /etc/fstab 
+
+#
+# /etc/fstab
+# Created by anaconda on Sat May 12 18:50:26 2018
+#
+# Accessible filesystems, by reference, are maintained under '/dev/disk'
+# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info
+#
+/dev/mapper/VolGroup00-LogVol00 /                       xfs     defaults        0 0
+UUID=570897ca-e759-4c81-90cf-389da6eee4cc /boot                   xfs     defaults        0 0
+/dev/mapper/VolGroup00-LogVol01 swap                    swap    defaults        0 0
+UUID=f8115b60-b331-4549-b4a0-add2b399c07e /var		ext4	defaults	0 0
+UUID=abca8ab6-acd0-41db-aa86-2e7e01d431bd /home		xfs	defaults	0 0
+
+UUID=9787b8e8-0509-48ce-952a-1d7ecd9dc2b6 /opt		btrfs	defaults	0 0 
+UUID=b519be00-ec1d-412d-81b0-6cb7e70ccb11 /opt/thunder_in_paradise	ext4	defaults	0 0
+]0;root@lvm:~[root@lvm ~]# man btrfs
+No manual entry for btrfs
+]0;root@lvm:~[root@lvm ~]# man btrfs[Kmoun.[Kt[K[Kmount.nfs[K[K[K[K[K[K[K[K[Kmkfs
+mkfs         mkfs.btrfs   mkfs.cramfs  mkfs.ext2    mkfs.ext3    mkfs.ext4    mkfs.minix   mkfs.xfs     
+[root@lvm ~]# mkfs,[K.btrfs [C[1@m[1@a[1@n[1@ 
+No manual entry for mkfs.btrfs
+]0;root@lvm:~[root@lvm ~]# man mkfs.btrfs [1P[1P[1P[1P[1P[1P[1P[1P[1P[1@a[1@p[1@t[1P[1@r[1@o[3@pos[1@ 
+btrfs: nothing appropriate.
+]0;root@lvm:~[root@lvm ~]# btrfs
+btrfs               btrfsck             btrfs-convert       btrfs-debug-tree    btrfs-find-root     btrfs-image         btrfs-map-logical   btrfs-select-super  btrfstune           btrfs-zero-log
+[root@lvm ~]# btrfsmbtrfsabtrfsnbtrfs btrfs
+No manual entry for btrfs
+]0;root@lvm:~[root@lvm ~]# man btrfs[1P[1P[1P btrfs[1Pbtrfs[C[C[C[C[C --help
+usage: btrfs [--help] [--version] <group> [<group>...] <command> [<args>]
+
+    btrfs subvolume create [-i <qgroupid>] [<dest>/]<name>
+        Create a subvolume
+    btrfs subvolume delete [options] <subvolume> [<subvolume>...]
+        Delete subvolume(s)
+    btrfs subvolume list [options] [-G [+|-]value] [-C [+|-]value] [--sort=gen,ogen,rootid,path] <path>
+        List subvolumes (and snapshots)
+    btrfs subvolume snapshot [-r] [-i <qgroupid>] <source> <dest>|[<dest>/]<name>
+        Create a snapshot of the subvolume
+    btrfs subvolume get-default <path>
+        Get the default subvolume of a filesystem
+    btrfs subvolume set-default <subvolid> <path>
+        Set the default subvolume of a filesystem
+    btrfs subvolume find-new <path> <lastgen>
+        List the recently modified files in a filesystem
+    btrfs subvolume show <subvol-path>
+        Show more information of the subvolume
+    btrfs subvolume sync <path> [<subvol-id>...]
+        Wait until given subvolume(s) are completely removed from the filesystem.
+
+    btrfs filesystem df [options] <path>
+        Show space usage information for a mount point
+    btrfs filesystem du [options] <path> [<path>..]
+        Summarize disk usage of each file.
+    btrfs filesystem show [options] [<path>|<uuid>|<device>|label]
+        Show the structure of a filesystem
+    btrfs filesystem sync <path>
+        Force a sync on a filesystem
+    btrfs filesystem defragment [options] <file>|<dir> [<file>|<dir>...]
+        Defragment a file or a directory
+    btrfs filesystem resize [devid:][+/-]<newsize>[kKmMgGtTpPeE]|[devid:]max <path>
+        Resize a filesystem
+    btrfs filesystem label [<device>|<mount_point>] [<newlabel>]
+        Get or change the label of a filesystem
+    btrfs filesystem usage [options] <path> [<path>..]
+        Show detailed information about internal filesystem usage .
+
+    btrfs balance start [options] <path>
+        Balance chunks across the devices
+    btrfs balance pause <path>
+        Pause running balance
+    btrfs balance cancel <path>
+        Cancel running or paused balance
+    btrfs balance resume <path>
+        Resume interrupted balance
+    btrfs balance status [-v] <path>
+        Show status of running or paused balance
+
+    btrfs device add [options] <device> [<device>...] <path>
+        Add a device to a filesystem
+    btrfs device delete <device>|<devid> [<device>|<devid>...] <path>
+    btrfs device remove <device>|<devid> [<device>|<devid>...] <path>
+        Remove a device from a filesystem
+    btrfs device scan [(-d|--all-devices)|<device> [<device>...]]
+        Scan devices for a btrfs filesystem
+    btrfs device ready <device>
+        Check device to see if it has all of its devices in cache for mounting
+    btrfs device stats [options] <path>|<device>
+        Show device IO error statistics
+    btrfs device usage [options] <path> [<path>..]
+        Show detailed information about internal allocations in devices.
+
+    btrfs scrub start [-BdqrRf] [-c ioprio_class -n ioprio_classdata] <path>|<device>
+        Start a new scrub. If a scrub is already running, the new one fails.
+    btrfs scrub cancel <path>|<device>
+        Cancel a running scrub
+    btrfs scrub resume [-BdqrR] [-c ioprio_class -n ioprio_classdata] <path>|<device>
+        Resume previously canceled or interrupted scrub
+    btrfs scrub status [-dR] <path>|<device>
+        Show status of running or finished scrub
+
+    btrfs check [options] <device>
+        Check structural integrity of a filesystem (unmounted).
+
+    btrfs rescue chunk-recover [options] <device>
+        Recover the chunk tree by scanning the devices one by one.
+    btrfs rescue super-recover [options] <device>
+        Recover bad superblocks from good copies
+    btrfs rescue zero-log <device>
+        Clear the tree log. Usable if it's corrupted and prevents mount.
+
+    btrfs restore [options] <device> <path> | -l <device>
+        Try to restore files from a damaged filesystem (unmounted)
+
+    btrfs inspect-internal inode-resolve [-v] <inode> <path>
+        Get file system paths for the given inode
+    btrfs inspect-internal logical-resolve [-Pv] [-s bufsize] <logical> <path>
+        Get file system paths for the given logical address
+    btrfs inspect-internal subvolid-resolve <subvolid> <path>
+        Get file system paths for the given subvolume ID.
+    btrfs inspect-internal rootid <path>
+        Get tree ID of the containing subvolume of path.
+    btrfs inspect-internal min-dev-size [options] <path>
+        Get the minimum size the device can be shrunk to. The
+    btrfs inspect-internal dump-tree [options] device
+        Dump tree structures from a given device
+    btrfs inspect-internal dump-super [options] device [device...]
+        Dump superblock from a device in a textual form
+    btrfs inspect-internal tree-stats [options] <device>
+        Print various stats for trees
+
+    btrfs property get [-t <type>] <object> [<name>]
+        Gets a property from a btrfs object.
+    btrfs property set [-t <type>] <object> <name> <value>
+        Sets a property on a btrfs object.
+    btrfs property list [-t <type>] <object>
+        Lists available properties with their descriptions for the given object.
+
+    btrfs send [-ve] [-p <parent>] [-c <clone-src>] [-f <outfile>] <subvol> [<subvol>...]
+        Send the subvolume(s) to stdout.
+    btrfs receive [options] <mount>
+btrfs receive --dump [options]
+        Receive subvolumes from a stream
+
+    btrfs quota enable <path>
+        Enable subvolume quota support for a filesystem.
+    btrfs quota disable <path>
+        Disable subvolume quota support for a filesystem.
+    btrfs quota rescan [-sw] <path>
+        Trash all qgroup numbers and scan the metadata again with the current config.
+
+    btrfs qgroup assign [options] <src> <dst> <path>
+        Assign SRC as the child qgroup of DST
+    btrfs qgroup remove <src> <dst> <path>
+        Remove a child qgroup SRC from DST.
+    btrfs qgroup create <qgroupid> <path>
+        Create a subvolume quota group.
+    btrfs qgroup destroy <qgroupid> <path>
+        Destroy a quota group.
+    btrfs qgroup show [options] <path>
+        Show subvolume quota groups.
+    btrfs qgroup limit [options] <size>|none [<qgroupid>] <path>
+        Set the limits a subvolume quota group.
+
+    btrfs replace start [-Bfr] <srcdev>|<devid> <targetdev> <mount_point>
+        Replace device of a btrfs filesystem.
+    btrfs replace status [-1] <mount_point>
+        Print status and progress information of a running device replace
+    btrfs replace cancel <mount_point>
+        Cancel a running device replace operation.
+
+    btrfs help [--full]
+        Display help information
+    btrfs version
+        Display btrfs-progs version
+
+Use --help as an argument for information on a specific group or command.
+]0;root@lvm:~[root@lvm ~]# 
+]0;root@lvm:~[root@lvm ~]# иека[Kbtrf[Kfs
+btrfs               btrfsck             btrfs-convert       btrfs-debug-tree    btrfs-find-root     btrfs-image         btrfs-map-logical   btrfs-select-super  btrfstune           btrfs-zero-log
+[root@lvm ~]# btrfs de[K[K
+anaconda-ks.cfg  .bash_history    .bash_logout     .bash_profile    .bashrc          .cshrc           .lesshst         original-ks.cfg  .ssh/            .tcshrc          
+[root@lvm ~]# btrfs --[K[K[K device status
+btrfs device: unknown token 'status'
+usage: btrfs device <command> [<args>]
+
+    btrfs device add [options] <device> [<device>...] <path>
+        Add a device to a filesystem
+    btrfs device delete <device>|<devid> [<device>|<devid>...] <path>
+    btrfs device remove <device>|<devid> [<device>|<devid>...] <path>
+        Remove a device from a filesystem
+    btrfs device scan [(-d|--all-devices)|<device> [<device>...]]
+        Scan devices for a btrfs filesystem
+    btrfs device ready <device>
+        Check device to see if it has all of its devices in cache for mounting
+    btrfs device stats [options] <path>|<device>
+        Show device IO error statistics
+    btrfs device usage [options] <path> [<path>..]
+        Show detailed information about internal allocations in devices.
+
+manage and query devices in the filesystem
+]0;root@lvm:~[root@lvm ~]# btrfs device status[K[Ks
+btrfs device stats: too few arguments
+usage: btrfs device stats [options] <path>|<device>
+
+    Show device IO error statistics
+
+    Show device IO error statistics for all devices of the given filesystem
+    identified by PATH or DEVICE. The filesystem must be mounted.
+
+    -c|--check             return non-zero if any stat counter is not zero
+    -z|--reset             show current stats and reset values to zero
+
+]0;root@lvm:~[root@lvm ~]# btrfs device stats /dev/otus_vg_opt/lv_opt_master 
+[/dev/mapper/otus_vg_opt-lv_opt_master].write_io_errs    0
+[/dev/mapper/otus_vg_opt-lv_opt_master].read_io_errs     0
+[/dev/mapper/otus_vg_opt-lv_opt_master].flush_io_errs    0
+[/dev/mapper/otus_vg_opt-lv_opt_master].corruption_errs  0
+[/dev/mapper/otus_vg_opt-lv_opt_master].generation_errs  0
+]0;root@lvm:~[root@lvm ~]# mkk[Kfs.n[Kbtrfs --help
+Usage: mkfs.btrfs [options] dev [ dev ... ]
+Options:
+  allocation profiles:
+	-d|--data PROFILE       data profile, raid0, raid1, raid5, raid6, raid10, dup or single
+	-m|--metadata PROFILE   metadata profile, values like for data profile
+	-M|--mixed              mix metadata and data together
+  features:
+	-n|--nodesize SIZE      size of btree nodes
+	-s|--sectorsize SIZE    data block size (may not be mountable by current kernel)
+	-O|--features LIST      comma separated list of filesystem features (use '-O list-all' to list features)
+	-L|--label LABEL        set the filesystem label
+	-U|--uuid UUID          specify the filesystem UUID (must be unique)
+  creation:
+	-b|--byte-count SIZE    set filesystem size to SIZE (on the first device)
+	-r|--rootdir DIR        copy files from DIR to the image root directory
+	-K|--nodiscard          do not perform whole device TRIM
+	-f|--force              force overwrite of existing filesystem
+  general:
+	-q|--quiet              no messages except errors
+	-V|--version            print the mkfs.btrfs version and exit
+	--help                  print this help and exit
+  deprecated:
+	-A|--alloc-start START  the offset to start the filesystem
+	-l|--leafsize SIZE      deprecated, alias for nodesize
+]0;root@lvm:~[root@lvm ~]# mkfs.btrfs --help[K[Kbtrfs
+btrfs               btrfsck             btrfs-convert       btrfs-debug-tree    btrfs-find-root     btrfs-image         btrfs-map-logical   btrfs-select-super  btrfstune           btrfs-zero-log
+[root@lvm ~]# btrfs
+usage: btrfs [--help] [--version] <group> [<group>...] <command> [<args>]
+
+Command groups:
+  subvolume         manage subvolumes: create, delete, list, etc
+  filesystem        overall filesystem tasks and information
+  balance           balance data across devices, or change block groups using filters
+  device            manage and query devices in the filesystem
+  scrub             verify checksums of data and metadata
+  rescue            toolbox for specific rescue operations
+  inspect-internal  query various internal information
+  property          modify properties of filesystem objects
+  quota             manage filesystem quota settings
+  qgroup            manage quota groups
+  replace           replace a device in the filesystem
+
+Commands:
+  check             Check structural integrity of a filesystem (unmounted).
+  restore           Try to restore files from a damaged filesystem (unmounted)
+  send              Send the subvolume(s) to stdout.
+  receive           Receive subvolumes from a stream
+  help              Display help information
+  version           Display btrfs-progs version
+
+For an overview of a given command use 'btrfs command --help'
+or 'btrfs [command...] --help --full' to print all available options.
+Any command name can be shortened as far as it stays unambiguous,
+however it is recommended to use full command names in scripts.
+All command groups have their manual page named 'btrfs-<group>'.
+]0;root@lvm:~[root@lvm ~]# btrfs filesystem 
+usage: btrfs filesystem [<group>] <command> [<args>]
+
+    btrfs filesystem df [options] <path>
+        Show space usage information for a mount point
+    btrfs filesystem du [options] <path> [<path>..]
+        Summarize disk usage of each file.
+    btrfs filesystem show [options] [<path>|<uuid>|<device>|label]
+        Show the structure of a filesystem
+    btrfs filesystem sync <path>
+        Force a sync on a filesystem
+    btrfs filesystem defragment [options] <file>|<dir> [<file>|<dir>...]
+        Defragment a file or a directory
+    btrfs filesystem resize [devid:][+/-]<newsize>[kKmMgGtTpPeE]|[devid:]max <path>
+        Resize a filesystem
+    btrfs filesystem label [<device>|<mount_point>] [<newlabel>]
+        Get or change the label of a filesystem
+    btrfs filesystem usage [options] <path> [<path>..]
+        Show detailed information about internal filesystem usage .
+
+overall filesystem tasks and information
+]0;root@lvm:~[root@lvm ~]# btrfs filesystem df /dev/otus_vg_opt/lv_opt_master 
+ERROR: not a btrfs filesystem: /dev/otus_vg_opt/lv_opt_master
+]0;root@lvm:~[root@lvm ~]# btrfs filesystem df /dev/otus_vg_opt/lv_opt_master [K
+btrfs filesystem df: too few arguments
+usage: btrfs filesystem df [options] <path>
+
+    Show space usage information for a mount point
+
+    -b|--raw           raw numbers in bytes
+    -h|--human-readable
+                       human friendly numbers, base 1024 (default)
+    -H                 human friendly numbers, base 1000
+    --iec              use 1024 as a base (KiB, MiB, GiB, TiB)
+    --si               use 1000 as a base (kB, MB, GB, TB)
+    -k|--kbytes        show sizes in KiB, or kB with --si
+    -m|--mbytes        show sizes in MiB, or MB with --si
+    -g|--gbytes        show sizes in GiB, or GB with --si
+    -t|--tbytes        show sizes in TiB, or TB with --si
+
+]0;root@lvm:~[root@lvm ~]# btrfs filesystem df [K[K
+usage: btrfs [--help] [--version] <group> [<group>...] <command> [<args>]
+
+Command groups:
+  subvolume         manage subvolumes: create, delete, list, etc
+  filesystem        overall filesystem tasks and information
+  balance           balance data across devices, or change block groups using filters
+  device            manage and query devices in the filesystem
+  scrub             verify checksums of data and metadata
+  rescue            toolbox for specific rescue operations
+  inspect-internal  query various internal information
+  property          modify properties of filesystem objects
+  quota             manage filesystem quota settings
+  qgroup            manage quota groups
+  replace           replace a device in the filesystem
+
+Commands:
+  check             Check structural integrity of a filesystem (unmounted).
+  restore           Try to restore files from a damaged filesystem (unmounted)
+  send              Send the subvolume(s) to stdout.
+  receive           Receive subvolumes from a stream
+  help              Display help information
+  version           Display btrfs-progs version
+
+For an overview of a given command use 'btrfs command --help'
+or 'btrfs [command...] --help --full' to print all available options.
+Any command name can be shortened as far as it stays unambiguous,
+however it is recommended to use full command names in scripts.
+All command groups have their manual page named 'btrfs-<group>'.
+]0;root@lvm:~[root@lvm ~]# btrfs device 
+usage: btrfs device <command> [<args>]
+
+    btrfs device add [options] <device> [<device>...] <path>
+        Add a device to a filesystem
+    btrfs device delete <device>|<devid> [<device>|<devid>...] <path>
+    btrfs device remove <device>|<devid> [<device>|<devid>...] <path>
+        Remove a device from a filesystem
+    btrfs device scan [(-d|--all-devices)|<device> [<device>...]]
+        Scan devices for a btrfs filesystem
+    btrfs device ready <device>
+        Check device to see if it has all of its devices in cache for mounting
+    btrfs device stats [options] <path>|<device>
+        Show device IO error statistics
+    btrfs device usage [options] <path> [<path>..]
+        Show detailed information about internal allocations in devices.
+
+manage and query devices in the filesystem
+]0;root@lvm:~[root@lvm ~]# btrfs device stats /dev/[K[K[K[Kopt/
+[/dev/mapper/otus_vg_opt-lv_opt_master].write_io_errs    0
+[/dev/mapper/otus_vg_opt-lv_opt_master].read_io_errs     0
+[/dev/mapper/otus_vg_opt-lv_opt_master].flush_io_errs    0
+[/dev/mapper/otus_vg_opt-lv_opt_master].corruption_errs  0
+[/dev/mapper/otus_vg_opt-lv_opt_master].generation_errs  0
+]0;root@lvm:~[root@lvm ~]# btrfs device stats /opt/[K[Kfilesystem df /opt/
+Data, single: total=8.00MiB, used=64.00KiB
+System, DUP: total=8.00MiB, used=16.00KiB
+Metadata, DUP: total=337.56MiB, used=112.00KiB
+GlobalReserve, single: total=16.00MiB, used=0.00B
+]0;root@lvm:~[root@lvm ~]# btrfs
+btrfs               btrfsck             btrfs-convert       btrfs-debug-tree    btrfs-find-root     btrfs-image         btrfs-map-logical   btrfs-select-super  btrfstune           btrfs-zero-log
+[root@lvm ~]# btrfstune --help
+usage: btrfstune [options] device
+	-S value	positive value will enable seeding, zero to disable, negative is not allowed
+	-r 		enable extended inode refs
+	-x 		enable skinny metadata extent refs
+	-n 		enable no-holes feature (more efficient sparse file representation)
+	-f 		force to do dangerous operation, make sure that you are aware of the dangers
+	-u 		change fsid, use a random one
+	-U UUID		change fsid to UUID
+]0;root@lvm:~[root@lvm ~]# 
+]0;root@lvm:~[root@lvm ~]# cd /[K[K[K[Kls -l /opt/tunder_in_paradise/
+total 16
+drwx------. 2 root root 16384 Feb 21 14:07 [0m[38;5;27mlost+found[0m
+]0;root@lvm:~[root@lvm ~]# ls -l /opt/tunder_in_paradise/[C[C[C[C[C[C[C[C[C[C[C[C[C[C[2P[C[3P/opt/tunder_in_paradise/[C[C[C[C[C[C[C[C[C[C[C[C[C[Cf /opt/tunder_in_paradise/[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Co /opt/tunder_in_paradise/[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cr /opt/tunder_in_paradise/[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C /opt/tunder_in_paradise/[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C( /opt/tunder_in_paradise/[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C( /opt/tunder_in_paradise/[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cn /opt/tunder_in_paradise/[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C= /opt/tunder_in_paradise/[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C1 /opt/tunder_in_paradise/[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C; /opt/tunder_in_paradise/[C /opt/tunder_in_paradise/[1P/opt/tunder_in_paradise/[C /opt/tunder_in_paradise/n /opt/tunder_in_paradise/< /opt/tunder_in_paradise/= /opt/tunder_in_paradise/1 /opt/tunder_in_paradise/0 /opt/tunder_in_paradise/; /opt/tunder_in_paradise/[C /opt/tunder_in_paradise/n /opt/tunder_in_paradise/+ /opt/tunder_in_paradise/+ /opt/tunder_in_paradise/) /opt/tunder_in_paradise/) /opt/tunder_in_paradise/; /opt/tunder_in_paradise/[C /opt/tunder_in_paradise/d /opt/tunder_in_paradise/o /opt/tunder_in_paradise/[C /opt/tunder_in_paradise/f /opt/tunder_in_paradise/a /opt/tunder_in_paradise/
+factor     faillock   fallocate  false      
+[root@lvm ~]# for ((n=1; n<=10; n++)); do fa /opt/tunder_in_paradise/l /opt/tunder_in_paradise/l /opt/tunder_in_paradise/ocate /opt/tunder_in_paradise/[C /opt/tunder_in_paradise/- /opt/tunder_in_paradise/- /opt/tunder_in_paradise/s /opt/tunder_in_paradise/e /opt/tunder_in_paradise/[1P /opt/tunder_in_paradise/i /opt/tunder_in_paradise/[1P /opt/tunder_in_paradise/[1P /opt/tunder_in_paradise/
+--help        --keep-size   --length      --offset      --punch-hole  --version     
+[root@lvm ~]# for ((n=1; n<=10; n++)); do fallocate -- /opt/tunder_in_paradise/l /opt/tunder_in_paradise/e /opt/tunder_in_paradise/ngth /opt/tunder_in_paradise/[C /opt/tunder_in_paradise/1 /opt/tunder_in_paradise/0 /opt/tunder_in_paradise/M /opt/tunder_in_paradise/[C /opt/tunder_in_paradise/[1P/opt/tunder_in_paradise/[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cbunker_%[K$n; do
+-bash: syntax error near unexpected token `do'
+]0;root@lvm:~[root@lvm ~]# for ((n=1; n<=10; n++)); do fallocate --length 10M /opt/tunder_in_paradise/bunker_$n; done
+]0;root@lvm:~[root@lvm ~]# ls -l /opt/tunder_in_paradise/
+total 102416
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_1
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_10
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_2
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_3
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_4
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_5
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_6
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_7
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_8
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_9
+drwx------. 2 root root    16384 Feb 21 14:07 [0m[38;5;27mlost+found[0m
+]0;root@lvm:~[root@lvm ~]# ls -l /opt/tunder_in_paradise/[C[C[C[C[C[C[C[C[C[C[C[C[C[Cfor ((n=1; n<=10; n++)); do fallocate --length 10M /opt/tunder_in_paradise/bunker_$n; done[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P[1@5[1P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P[1@5[1P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1@t[1@e[1@n[1@d[1@e[1@r[1P[1P[1P[1P[1P[1P
+]0;root@lvm:~[root@lvm ~]# ls -l /opt/
+total 4
+drwxr-xr-x. 3 root root 4096 Feb 21 14:31 [0m[38;5;27mtunder_in_paradise[0m
+]0;root@lvm:~[root@lvm ~]# ls -l /opt/tunder_in_paradise/tender_[K[K
+total 128016
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_1
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_10
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_2
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_3
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_4
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_5
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_6
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_7
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_8
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_9
+drwx------. 2 root root    16384 Feb 21 14:07 [0m[38;5;27mlost+found[0m
+-rw-r--r--. 1 root root  5242880 Feb 21 14:31 tender_1
+-rw-r--r--. 1 root root  5242880 Feb 21 14:31 tender_2
+-rw-r--r--. 1 root root  5242880 Feb 21 14:31 tender_3
+-rw-r--r--. 1 root root  5242880 Feb 21 14:31 tender_4
+-rw-r--r--. 1 root root  5242880 Feb 21 14:31 tender_5
+]0;root@lvm:~[root@lvm ~]# lc[K[Klvs
+  LV            VG          Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  LogVol00      VolGroup00  -wi-ao----   8.00g                                                    
+  LogVol01      VolGroup00  -wi-ao----   1.50g                                                    
+  LogVol_home   VolGroup00  Owi-aos---   2.00g                                                    
+  lv_opt_master otus_vg_opt -wi-ao----   6.59g                                                    
+  lv_opt_short  otus_vg_opt -wi-ao----   1.00g                                                    
+  lv_var        otus_vg_var rwi-aor--- 952.00m                                    100.00          
+]0;root@lvm:~[root@lvm ~]# lvcreate --help
+  lvcreate - Create a logical volume
+
+  Create a linear LV.
+  lvcreate -L|--size Size[m|UNIT] VG
+	[ -l|--extents Number[PERCENT] ]
+	[    --type linear ]
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Create a striped LV (infers --type striped).
+  lvcreate -i|--stripes Number -L|--size Size[m|UNIT] VG
+	[ -l|--extents Number[PERCENT] ]
+	[ -I|--stripesize Size[k|UNIT] ]
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Create a raid1 or mirror LV (infers --type raid1|mirror).
+  lvcreate -m|--mirrors Number -L|--size Size[m|UNIT] VG
+	[ -l|--extents Number[PERCENT] ]
+	[ -R|--regionsize Size[m|UNIT] ]
+	[    --mirrorlog core|disk ]
+	[    --minrecoveryrate Size[k|UNIT] ]
+	[    --maxrecoveryrate Size[k|UNIT] ]
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Create a raid LV (a specific raid level must be used, e.g. raid1).
+  lvcreate --type raid -L|--size Size[m|UNIT] VG
+	[ -l|--extents Number[PERCENT] ]
+	[ -m|--mirrors Number ]
+	[ -i|--stripes Number ]
+	[ -I|--stripesize Size[k|UNIT] ]
+	[ -R|--regionsize Size[m|UNIT] ]
+	[    --minrecoveryrate Size[k|UNIT] ]
+	[    --maxrecoveryrate Size[k|UNIT] ]
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Create a raid10 LV.
+  lvcreate -m|--mirrors Number -i|--stripes Number -L|--size Size[m|UNIT] VG
+	[ -l|--extents Number[PERCENT] ]
+	[ -I|--stripesize Size[k|UNIT] ]
+	[ -R|--regionsize Size[m|UNIT] ]
+	[    --minrecoveryrate Size[k|UNIT] ]
+	[    --maxrecoveryrate Size[k|UNIT] ]
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Create a COW snapshot LV of an origin LV.
+  lvcreate -s|--snapshot -L|--size Size[m|UNIT] LV
+	[ -l|--extents Number[PERCENT] ]
+	[ -i|--stripes Number ]
+	[ -I|--stripesize Size[k|UNIT] ]
+	[ -c|--chunksize Size[k|UNIT] ]
+	[    --type snapshot ]
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Create a thin pool.
+  lvcreate --type thin-pool -L|--size Size[m|UNIT] VG
+	[ -l|--extents Number[PERCENT] ]
+	[ -c|--chunksize Size[k|UNIT] ]
+	[ -i|--stripes Number ]
+	[ -I|--stripesize Size[k|UNIT] ]
+	[    --thinpool LV_new ]
+	[    --poolmetadatasize Size[m|UNIT] ]
+	[    --poolmetadataspare y|n ]
+	[    --discards passdown|nopassdown|ignore ]
+	[    --errorwhenfull y|n ]
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Create a cache pool.
+  lvcreate --type cache-pool -L|--size Size[m|UNIT] VG
+	[ -l|--extents Number[PERCENT] ]
+	[ -H|--cache ]
+	[ -c|--chunksize Size[k|UNIT] ]
+	[    --poolmetadatasize Size[m|UNIT] ]
+	[    --poolmetadataspare y|n ]
+	[    --cachemode writethrough|writeback|passthrough ]
+	[    --cachepolicy String ]
+	[    --cachesettings String ]
+	[    --cachemetadataformat auto|1|2 ]
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Create a thin LV in a thin pool (infers --type thin).
+  lvcreate -V|--virtualsize Size[m|UNIT] --thinpool LV_thinpool VG
+	[ -T|--thin ]
+	[    --type thin ]
+	[    --discards passdown|nopassdown|ignore ]
+	[    --errorwhenfull y|n ]
+	[ COMMON_OPTIONS ]
+
+  Create a thin LV that is a snapshot of an existing thin LV 
+  (infers --type thin).
+  lvcreate -s|--snapshot LV_thin
+	[    --type thin ]
+	[    --discards passdown|nopassdown|ignore ]
+	[    --errorwhenfull y|n ]
+	[ COMMON_OPTIONS ]
+
+  Create a thin LV that is a snapshot of an external origin LV.
+  lvcreate --type thin --thinpool LV_thinpool LV
+	[ -T|--thin ]
+	[ -c|--chunksize Size[k|UNIT] ]
+	[    --poolmetadatasize Size[m|UNIT] ]
+	[    --poolmetadataspare y|n ]
+	[    --discards passdown|nopassdown|ignore ]
+	[    --errorwhenfull y|n ]
+	[ COMMON_OPTIONS ]
+
+  Create a thin LV, first creating a thin pool for it, 
+  where the new thin pool is named by the --thinpool arg.
+  lvcreate --type thin -V|--virtualsize Size[m|UNIT] -L|--size Size[m|UNIT] --thinpool LV_new
+	[ -l|--extents Number[PERCENT] ]
+	[ -T|--thin ]
+	[ -c|--chunksize Size[k|UNIT] ]
+	[ -i|--stripes Number ]
+	[ -I|--stripesize Size[k|UNIT] ]
+	[    --poolmetadatasize Size[m|UNIT] ]
+	[    --poolmetadataspare y|n ]
+	[    --discards passdown|nopassdown|ignore ]
+	[    --errorwhenfull y|n ]
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Create a cache LV, first creating a new origin LV, 
+  then combining it with the existing cache pool named 
+  by the --cachepool arg.
+  lvcreate --type cache -L|--size Size[m|UNIT] --cachepool LV_cachepool VG
+	[ -l|--extents Number[PERCENT] ]
+	[ -H|--cache ]
+	[ -c|--chunksize Size[k|UNIT] ]
+	[ -i|--stripes Number ]
+	[ -I|--stripesize Size[k|UNIT] ]
+	[    --poolmetadatasize Size[m|UNIT] ]
+	[    --poolmetadataspare y|n ]
+	[    --cachemode writethrough|writeback|passthrough ]
+	[    --cachepolicy String ]
+	[    --cachesettings String ]
+	[    --cachemetadataformat auto|1|2 ]
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Common options for command:
+	[ -a|--activate y|n|ay ]
+	[ -A|--autobackup y|n ]
+	[ -C|--contiguous y|n ]
+	[ -M|--persistent y|n ]
+	[ -j|--major Number ]
+	[ -k|--setactivationskip y|n ]
+	[ -K|--ignoreactivationskip ]
+	[ -n|--name String ]
+	[ -p|--permission rw|r ]
+	[ -r|--readahead auto|none|Number ]
+	[ -W|--wipesignatures y|n ]
+	[ -Z|--zero y|n ]
+	[    --addtag Tag ]
+	[    --alloc contiguous|cling|cling_by_tags|normal|anywhere|inherit ]
+	[    --ignoremonitoring ]
+	[    --metadataprofile String ]
+	[    --minor Number ]
+	[    --monitor y|n ]
+	[    --nosync ]
+	[    --noudevsync ]
+	[    --reportformat basic|json ]
+
+  Common options for lvm:
+	[ -d|--debug ]
+	[ -h|--help ]
+	[ -q|--quiet ]
+	[ -v|--verbose ]
+	[ -y|--yes ]
+	[ -t|--test ]
+	[    --commandprofile String ]
+	[    --config String ]
+	[    --driverloaded y|n ]
+	[    --lockopt String ]
+	[    --longhelp ]
+	[    --profile String ]
+	[    --version ]
+
+  Use --longhelp to show all options and advanced commands.
+]0;root@lvm:~[root@lvm ~]# lvcreate --help[K[K[root@lvm ~]# lvcreate --[K[root@lvm ~]# lvcreate --size 100M --name [Ksnapshot --name snap_opt_short [C[C[C[C[C[C[C[C[C[C[C[C[C[C[1@#
+]0;root@lvm:~[root@lvm ~]# vgs
+  VG          #PV #LV #SN Attr   VSize   VFree 
+  VolGroup00    1   3   1 wz--n- <38.97g 27.34g
+  otus_vg_opt   2   2   0 wz--n-  10.99g <3.40g
+  otus_vg_var   2   1   0 wz--n-   2.99g  1.12g
+]0;root@lvm:~[root@lvm ~]# lvs
+  LV            VG          Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  LogVol00      VolGroup00  -wi-ao----   8.00g                                                    
+  LogVol01      VolGroup00  -wi-ao----   1.50g                                                    
+  LogVol_home   VolGroup00  Owi-aos---   2.00g                                                    
+  lv_opt_master otus_vg_opt -wi-ao----   6.59g                                                    
+  lv_opt_short  otus_vg_opt -wi-ao----   1.00g                                                    
+  lv_var        otus_vg_var rwi-aor--- 952.00m                                    100.00          
+]0;root@lvm:~[root@lvm ~]# lvsvgs#lvcreate --size 100M --snapshot --name snap_opt_short otus[K[K[K[K/.de[K[K[Kdev/otus_vg_opt/lv_opt_short [C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P
+  Logical volume "snap_opt_short" created.
+]0;root@lvm:~[root@lvm ~]# lvs
+  LV             VG          Attr       LSize   Pool Origin       Data%  Meta%  Move Log Cpy%Sync Convert
+  LogVol00       VolGroup00  -wi-ao----   8.00g                                                          
+  LogVol01       VolGroup00  -wi-ao----   1.50g                                                          
+  LogVol_home    VolGroup00  Owi-aos---   2.00g                                                          
+  lv_opt_master  otus_vg_opt -wi-ao----   6.59g                                                          
+  lv_opt_short   otus_vg_opt owi-aos---   1.00g                                                          
+  snap_opt_short otus_vg_opt swi-a-s--- 100.00m      lv_opt_short 0.01                                   
+  lv_var         otus_vg_var rwi-aor--- 952.00m                                          100.00          
+]0;root@lvm:~[root@lvm ~]# cd /opt/tunder_in_paradise/
+]0;root@lvm:/opt/tunder_in_paradise[root@lvm tunder_in_paradise]# ls -l
+total 128016
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_1
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_10
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_2
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_3
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_4
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_5
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_6
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_7
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_8
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_9
+drwx------. 2 root root    16384 Feb 21 14:07 [0m[38;5;27mlost+found[0m
+-rw-r--r--. 1 root root  5242880 Feb 21 14:31 tender_1
+-rw-r--r--. 1 root root  5242880 Feb 21 14:31 tender_2
+-rw-r--r--. 1 root root  5242880 Feb 21 14:31 tender_3
+-rw-r--r--. 1 root root  5242880 Feb 21 14:31 tender_4
+-rw-r--r--. 1 root root  5242880 Feb 21 14:31 tender_5
+]0;root@lvm:/opt/tunder_in_paradise[root@lvm tunder_in_paradise]# rn[K[Krm [K[K[Kfor r in 2 4 6 8 10; do rm -f bunker_$r{bunker_$r[C[C[C[C[C[Cm_$r[1P_$r,_$rt_$re_$rn_$rd_$re_$rr_$r[C[C.{bunker,tender_$r/{bunker,tender_$r[C[C[C[C[C[C[C[C[C[C[C[C[C[C}_$r[C[C[C; done
+]0;root@lvm:/opt/tunder_in_paradise[root@lvm tunder_in_paradise]# ls -l
+total 66576
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_1
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_3
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_5
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_7
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_9
+drwx------. 2 root root    16384 Feb 21 14:07 [0m[38;5;27mlost+found[0m
+-rw-r--r--. 1 root root  5242880 Feb 21 14:31 tender_1
+-rw-r--r--. 1 root root  5242880 Feb 21 14:31 tender_3
+-rw-r--r--. 1 root root  5242880 Feb 21 14:31 tender_5
+]0;root@lvm:/opt/tunder_in_paradise[root@lvm tunder_in_paradise]# cd
+]0;root@lvm:~[root@lvm ~]# umount /mnt/[Kopt/tunder_in_paradise/
+]0;root@lvm:~[root@lvm ~]# lvs
+  LV             VG          Attr       LSize   Pool Origin       Data%  Meta%  Move Log Cpy%Sync Convert
+  LogVol00       VolGroup00  -wi-ao----   8.00g                                                          
+  LogVol01       VolGroup00  -wi-ao----   1.50g                                                          
+  LogVol_home    VolGroup00  Owi-aos---   2.00g                                                          
+  lv_opt_master  otus_vg_opt -wi-ao----   6.59g                                                          
+  lv_opt_short   otus_vg_opt owi-a-s---   1.00g                                                          
+  snap_opt_short otus_vg_opt swi-a-s--- 100.00m      lv_opt_short 0.08                                   
+  lv_var         otus_vg_var rwi-aor--- 952.00m                                          100.00          
+]0;root@lvm:~[root@lvm ~]# lvx[Kc
+lvchange   lvconvert  lvcreate   
+[root@lvm ~]# lvconvert --help
+  lvconvert - Change logical volume layout
+
+  Convert LV to linear.
+  lvconvert --type linear LV
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Convert LV to striped.
+  lvconvert --type striped LV
+	[ -I|--stripesize Size[k|UNIT] ]
+	[ -R|--regionsize Size[m|UNIT] ]
+	[ -i|--interval Number ]
+	[    --stripes Number ]
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Convert LV to raid or change raid layout 
+  (a specific raid level must be used, e.g. raid1).
+  lvconvert --type raid LV
+	[ -m|--mirrors [+|-]Number ]
+	[ -I|--stripesize Size[k|UNIT] ]
+	[ -R|--regionsize Size[m|UNIT] ]
+	[ -i|--interval Number ]
+	[    --stripes Number ]
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Convert LV to raid1 or mirror, or change number of mirror images.
+  lvconvert -m|--mirrors [+|-]Number LV
+	[ -R|--regionsize Size[m|UNIT] ]
+	[ -i|--interval Number ]
+	[    --mirrorlog core|disk ]
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Convert raid LV to change number of stripe images.
+  lvconvert --stripes Number LV_raid
+	[ -i|--interval Number ]
+	[ -R|--regionsize Size[m|UNIT] ]
+	[ -I|--stripesize Size[k|UNIT] ]
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Convert raid LV to change the stripe size.
+  lvconvert -I|--stripesize Size[k|UNIT] LV_raid
+	[ -i|--interval Number ]
+	[ -R|--regionsize Size[m|UNIT] ]
+	[ COMMON_OPTIONS ]
+
+  Split images from a raid1 or mirror LV and use them to create a new LV.
+  lvconvert --splitmirrors Number -n|--name LV_new LV_cache_mirror_raid1
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Split images from a raid1 LV and track changes to origin for later merge.
+  lvconvert --splitmirrors Number --trackchanges LV_cache_raid1
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Merge LV images that were split from a raid1 LV.
+  lvconvert --mergemirrors VG|LV_linear_raid|Tag ...
+	[ COMMON_OPTIONS ]
+
+  Convert LV to a thin LV, using the original LV as an external origin.
+  lvconvert --type thin --thinpool LV LV_linear_striped_thin_cache_raid
+	[ -T|--thin ]
+	[ -r|--readahead auto|none|Number ]
+	[ -c|--chunksize Size[k|UNIT] ]
+	[ -Z|--zero y|n ]
+	[    --originname LV_new ]
+	[    --poolmetadata LV ]
+	[    --poolmetadatasize Size[m|UNIT] ]
+	[    --poolmetadataspare y|n ]
+	[    --metadataprofile String ]
+	[ COMMON_OPTIONS ]
+
+  Convert LV to type cache.
+  lvconvert --type cache --cachepool LV LV_linear_striped_thinpool_raid
+	[ -H|--cache ]
+	[ -Z|--zero y|n ]
+	[ -r|--readahead auto|none|Number ]
+	[ -c|--chunksize Size[k|UNIT] ]
+	[    --cachemetadataformat auto|1|2 ]
+	[    --cachemode writethrough|writeback|passthrough ]
+	[    --cachepolicy String ]
+	[    --cachesettings String ]
+	[    --poolmetadata LV ]
+	[    --poolmetadatasize Size[m|UNIT] ]
+	[    --poolmetadataspare y|n ]
+	[    --metadataprofile String ]
+	[ COMMON_OPTIONS ]
+
+  Convert LV to type thin-pool.
+  lvconvert --type thin-pool LV_linear_striped_cache_raid
+	[ -I|--stripesize Size[k|UNIT] ]
+	[ -r|--readahead auto|none|Number ]
+	[ -c|--chunksize Size[k|UNIT] ]
+	[ -Z|--zero y|n ]
+	[    --stripes Number ]
+	[    --discards passdown|nopassdown|ignore ]
+	[    --poolmetadata LV ]
+	[    --poolmetadatasize Size[m|UNIT] ]
+	[    --poolmetadataspare y|n ]
+	[    --metadataprofile String ]
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Convert LV to type cache-pool.
+  lvconvert --type cache-pool LV_linear_striped_raid
+	[ -Z|--zero y|n ]
+	[ -r|--readahead auto|none|Number ]
+	[ -c|--chunksize Size[k|UNIT] ]
+	[    --cachemetadataformat auto|1|2 ]
+	[    --cachemode writethrough|writeback|passthrough ]
+	[    --cachepolicy String ]
+	[    --cachesettings String ]
+	[    --poolmetadata LV ]
+	[    --poolmetadatasize Size[m|UNIT] ]
+	[    --poolmetadataspare y|n ]
+	[    --metadataprofile String ]
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Separate and keep the cache pool from a cache LV.
+  lvconvert --splitcache LV_thinpool_cache_cachepool
+	[ COMMON_OPTIONS ]
+
+  Merge thin LV into its origin LV.
+  lvconvert --mergethin LV_thin ...
+	[ COMMON_OPTIONS ]
+
+  Merge COW snapshot LV into its origin.
+  lvconvert --mergesnapshot LV_snapshot ...
+	[ -i|--interval Number ]
+	[ COMMON_OPTIONS ]
+
+  Combine a former COW snapshot (second arg) with a former 
+  origin LV (first arg) to reverse a splitsnapshot command.
+  lvconvert --type snapshot LV LV_linear_striped
+	[ -s|--snapshot ]
+	[ -c|--chunksize Size[k|UNIT] ]
+	[ -Z|--zero y|n ]
+	[ COMMON_OPTIONS ]
+
+  Replace failed PVs in a raid or mirror LV. 
+  Repair a thin pool. 
+  Repair a cache pool.
+  lvconvert --repair LV_thinpool_cache_cachepool_mirror_raid
+	[ -i|--interval Number ]
+	[    --usepolicies ]
+	[    --poolmetadataspare y|n ]
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Replace specific PV(s) in a raid LV with another PV.
+  lvconvert --replace PV LV_raid
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Poll LV to continue conversion.
+  lvconvert --startpoll LV_mirror_raid
+	[ COMMON_OPTIONS ]
+
+  Common options for command:
+	[ -b|--background ]
+	[ -f|--force ]
+	[    --alloc contiguous|cling|cling_by_tags|normal|anywhere|inherit ]
+	[    --noudevsync ]
+
+  Common options for lvm:
+	[ -d|--debug ]
+	[ -h|--help ]
+	[ -q|--quiet ]
+	[ -v|--verbose ]
+	[ -y|--yes ]
+	[ -t|--test ]
+	[    --commandprofile String ]
+	[    --config String ]
+	[    --driverloaded y|n ]
+	[    --lockopt String ]
+	[    --longhelp ]
+	[    --profile String ]
+	[    --version ]
+
+  Use --longhelp to show all options and advanced commands.
+]0;root@lvm:~[root@lvm ~]# lvconvert --merge /dev/otus_vg_opt/
+lv_opt_master   lv_opt_short    snap_opt_short  
+[root@lvm ~]# lvconvert --merge /dev/otus_vg_opt/snap_opt_short 
+  Merging of volume otus_vg_opt/snap_opt_short started.
+  otus_vg_opt/lv_opt_short: Merged: 100.00%
+]0;root@lvm:~[root@lvm ~]# 
+]0;root@lvm:~[root@lvm ~]# mount -a
+mount: mount point /opt/thunder_in_paradise does not exist
+]0;root@lvm:~[root@lvm ~]# ls -l /opt/
+total 0
+drwxr-xr-x. 1 root root 0 Feb 21 14:09 [0m[38;5;27mtunder_in_paradise[0m
+]0;root@lvm:~[root@lvm ~]# ls -l /opt/tn[K[K[K[K[K[Kvim /etc/fstab [7Pmount -avim /etc/fstab [Kmv ./op[K[K[K[K/opt/th[Kunder_in_paradise/ /opt/tunder_in_paradise/hunder_in_paradise/
+]0;root@lvm:~[root@lvm ~]# mount -a
+]0;root@lvm:~[root@lvm ~]# ls -l /opt/thunder_in_paradise/
+total 128016
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_1
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_10
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_2
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_3
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_4
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_5
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_6
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_7
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_8
+-rw-r--r--. 1 root root 10485760 Feb 21 14:30 bunker_9
+drwx------. 2 root root    16384 Feb 21 14:07 [0m[38;5;27mlost+found[0m
+-rw-r--r--. 1 root root  5242880 Feb 21 14:31 tender_1
+-rw-r--r--. 1 root root  5242880 Feb 21 14:31 tender_2
+-rw-r--r--. 1 root root  5242880 Feb 21 14:31 tender_3
+-rw-r--r--. 1 root root  5242880 Feb 21 14:31 tender_4
+-rw-r--r--. 1 root root  5242880 Feb 21 14:31 tender_5
+]0;root@lvm:~[root@lvm ~]# [K[root@lvm ~]# [K[root@lvm ~]# sync
+]0;root@lvm:~[root@lvm ~]# 
+]0;root@lvm:~[root@lvm ~]# 
+]0;root@lvm:~[root@lvm ~]# 
+]0;root@lvm:~[root@lvm ~]# exit[K[K[K[Kls -l
+total 16
+-rw-------. 1 root root 5763 May 12  2018 anaconda-ks.cfg
+-rw-------. 1 root root 5432 May 12  2018 original-ks.cfg
+]0;root@lvm:~[root@lvm ~]# s[Kls -l /mnt/[Kopt/
+total 4
+drwxr-xr-x. 3 root root 4096 Feb 21 14:31 [0m[38;5;27mthunder_in_paradise[0m
+]0;root@lvm:~[root@lvm ~]# lsblk 
+NAME                            MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda                               8:0    0   40G  0 disk 
+├─sda1                            8:1    0    1M  0 part 
+├─sda2                            8:2    0    1G  0 part /boot
+└─sda3                            8:3    0   39G  0 part 
+  ├─VolGroup00-LogVol00         253:0    0    8G  0 lvm  /
+  ├─VolGroup00-LogVol01         253:1    0  1.5G  0 lvm  [SWAP]
+  ├─VolGroup00-LogVol_home-real 253:8    0    2G  0 lvm  
+  │ ├─VolGroup00-LogVol_home    253:2    0    2G  0 lvm  /home
+  │ └─VolGroup00-snap_home      253:10   0    2G  0 lvm  
+  └─VolGroup00-snap_home-cow    253:9    0  128M  0 lvm  
+    └─VolGroup00-snap_home      253:10   0    2G  0 lvm  
+sdb                               8:16   0   10G  0 disk 
+├─otus_vg_opt-lv_opt_master     253:11   0  6.6G  0 lvm  /opt
+└─otus_vg_opt-lv_opt_short      253:12   0    1G  0 lvm  /opt/thunder_in_paradise
+sdc                               8:32   0    2G  0 disk 
+├─otus_vg_var-lv_var_rmeta_0    253:3    0    4M  0 lvm  
+│ └─otus_vg_var-lv_var          253:7    0  952M  0 lvm  /var
+└─otus_vg_var-lv_var_rimage_0   253:4    0  952M  0 lvm  
+  └─otus_vg_var-lv_var          253:7    0  952M  0 lvm  /var
+sdd                               8:48   0    1G  0 disk 
+├─otus_vg_var-lv_var_rmeta_1    253:5    0    4M  0 lvm  
+│ └─otus_vg_var-lv_var          253:7    0  952M  0 lvm  /var
+└─otus_vg_var-lv_var_rimage_1   253:6    0  952M  0 lvm  
+  └─otus_vg_var-lv_var          253:7    0  952M  0 lvm  /var
+sde                               8:64   0    1G  0 disk 
+]0;root@lvm:~[root@lvm ~]# 
+]0;root@lvm:~[root@lvm ~]# 
+]0;root@lvm:~[root@lvm ~]# mk[K[Kbtrfs
+btrfs               btrfsck             btrfs-convert       btrfs-debug-tree    btrfs-find-root     btrfs-image         btrfs-map-logical   btrfs-select-super  btrfstune           btrfs-zero-log
+[root@lvm ~]# btrfs-convert --help
+usage: btrfs-convert [options] device
+options:
+	-d|--no-datasum        disable data checksum, sets NODATASUM
+	-i|--no-xattr          ignore xattrs and ACLs
+	-n|--no-inline         disable inlining of small files to metadata
+	-N|--nodesize SIZE     set filesystem metadata nodesize
+	-r|--rollback          roll back to the original filesystem
+	-l|--label LABEL       set filesystem label
+	-L|--copy-label        use label from converted filesystem
+	-p|--progress          show converting progress (default)
+	-O|--features LIST     comma separated list of filesystem features
+	--no-progress          show only overview, not the detailed progress
+
+Supported filesystems:
+	ext2/3/4: yes
+]0;root@lvm:~[root@lvm ~]# btrfstune --help
+usage: btrfstune [options] device
+	-S value	positive value will enable seeding, zero to disable, negative is not allowed
+	-r 		enable extended inode refs
+	-x 		enable skinny metadata extent refs
+	-n 		enable no-holes feature (more efficient sparse file representation)
+	-f 		force to do dangerous operation, make sure that you are aware of the dangers
+	-u 		change fsid, use a random one
+	-U UUID		change fsid to UUID
+]0;root@lvm:~[root@lvm ~]# btrfstune --help
+usage: btrfstune [options] device
+	-S value	positive value will enable seeding, zero to disable, negative is not allowed
+	-r 		enable extended inode refs
+	-x 		enable skinny metadata extent refs
+	-n 		enable no-holes feature (more efficient sparse file representation)
+	-f 		force to do dangerous operation, make sure that you are aware of the dangers
+	-u 		change fsid, use a random one
+	-U UUID		change fsid to UUID
+]0;root@lvm:~[root@lvm ~]# 
+]0;root@lvm:~[root@lvm ~]# cd[K[K
+]0;root@lvm:~[root@lvm ~]# vim [K[K /etc/fstab 
+[?1049h[?1h=[1;52r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[52;1H"/etc/fstab" 16L, 767C[2;1H#
+# /etc/fstab
+# Created by anaconda on Sat May 12 18:50:26 2018
+#
+# Accessible filesystems, by reference, are maintained under '/dev/disk'
+# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info
+#
+/dev/mapper/VolGroup00-LogVol00 /[23Cxfs     defaults[8C0 0
+UUID=570897ca-e759-4c81-90cf-389da6eee4cc /boot[19Cxfs     defaults[8C0 0
+/dev/mapper/VolGroup00-LogVol01 swap[20Cswap    defaults[8C0 0
+UUID=f8115b60-b331-4549-b4a0-add2b399c07e /var[10Cext4    defaults[8C0 0
+UUID=abca8ab6-acd0-41db-aa86-2e7e01d431bd /home[9Cxfs     defaults[8C0 0
+
+UUID=9787b8e8-0509-48ce-952a-1d7ecd9dc2b6 /opt[10Cbtrfs   defaults[8C0 0
+UUID=b519be00-ec1d-412d-81b0-6cb7e70ccb11 /opt/thunder_in_paradise      ext4    defaults[8C0 0
+[94m~                                                                                                                                                                                                                  [18;1H~                                                                                                                                                                                                                  [19;1H~                                                                                                                                                                                                                  [20;1H~                                                                                                                                                                                                                  [21;1H~                                                                                                                                                                                                                  [22;1H~                                                                                                                                                                                                                  [23;1H~                                                                                                                                                                                                                  [24;1H~                                                                                                                                                                                                                  [25;1H~                                                                                                                                                                                                                  [26;1H~                                                                                                                                                                                                                  [27;1H~                                                                                                                                                                                                                  [28;1H~                                                                                                                                                                                                                  [29;1H~                                                                                                                                                                                                                  [30;1H~                                                                                                                                                                                                                  [31;1H~                                                                                                                                                                                                                  [32;1H~                                                                                                                                                                                                                  [33;1H~                                                                                                                                                                                                                  [34;1H~                                                                                                                                                                                                                  [35;1H~                                                                                                                                                                                                                  [36;1H~                                                                                                                                                                                                                  [37;1H~                                                                                                                                                                                                                  [38;1H~                                                                                                                                                                                                                  [39;1H~                                                                                                                                                                                                                  [40;1H~                                                                                                                                                                                                                  [41;1H~                                                                                                                                                                                                                  [42;1H~                                                                                                                                                                                                                  [43;1H~                                                                                                                                                                                                                  [44;1H~                                                                                                                                                                                                                  [45;1H~                                                                                                                                                                                                                  [46;1H~                                                                                                                                                                                                                  [47;1H~                                                                                                                                                                                                                  [48;1H~                                                                                                                                                                                                                  [49;1H~                                                                                                                                                                                                                  [50;1H~                                                                                                                                                                                                                  [51;1H~                                                                                                                                                                                                                  [1;1H[?12l[?25h
+
+
+
+
+
+
+
+
+
+
+
+
+
+[?25l[m[52;1H[1m-- INSERT --[m[52;14H[K[15;1H[?12l[?25h[?25l#UUID=9787b8e8-0509-48ce-952a-1d7ecd9dc2b6 /opt#[?12l[?25h
+U[?25l#UUID=b519be00-ec1d-412d-81b0-6cb7e70ccb11 /opt/thunder_in_paradise#[?12l[?25h[52;1H[K[16;1H[?25l[?12l[?25h[?25l[52;1H:[?12l[?25hx[?25l"/etc/fstab" 16L, 769C written
+[?1l>[?12l[?25h[?1049l]0;root@lvm:~[root@lvm ~]# ls [K[K[Kumount /opt/thunder_in_paradise/
+]0;root@lvm:~[root@lvm ~]# umount /opt/thunder_in_paradise/[K[K[K
+]0;root@lvm:~[root@lvm ~]# ls -l /
+total 24
+lrwxrwxrwx.   1 root    root       7 Feb 20 15:27 [0m[38;5;51mbin[0m -> [38;5;27musr/bin[0m
+dr-xr-xr-x.   6 root    root    4096 Feb 20 15:32 [38;5;27mboot[0m
+drwxr-xr-x.  20 root    root    3180 Feb 21 14:36 [38;5;27mdev[0m
+drwxr-xr-x.  79 root    root    8192 Feb 21 14:49 [38;5;27metc[0m
+drwxr-xr-x.   3 root    root      21 Feb 21 13:17 [38;5;27mhome[0m
+lrwxrwxrwx.   1 root    root       7 Feb 20 15:27 [38;5;51mlib[0m -> [38;5;27musr/lib[0m
+lrwxrwxrwx.   1 root    root       9 Feb 20 15:27 [38;5;51mlib64[0m -> [38;5;27musr/lib64[0m
+drwxr-xr-x.   2 root    root       6 Apr 11  2018 [38;5;27mmedia[0m
+drwxr-xr-x.   4 root    root      35 Feb 20 13:41 [38;5;27mmnt[0m
+drwxr-xr-x.   2 root    root       6 Apr 11  2018 [38;5;27mopt[0m
+dr-xr-xr-x. 205 root    root       0 Feb 20 18:03 [38;5;27mproc[0m
+dr-xr-x---.   3 root    root     186 Feb 20 13:14 [38;5;27mroot[0m
+drwxr-xr-x.  26 root    root     700 Feb 21 14:37 [38;5;27mrun[0m
+lrwxrwxrwx.   1 root    root       8 Feb 20 15:27 [38;5;51msbin[0m -> [38;5;27musr/sbin[0m
+drwxr-xr-x.   2 root    root       6 Apr 11  2018 [38;5;27msrv[0m
+dr-xr-xr-x.  13 root    root       0 Feb 20 15:48 [38;5;27msys[0m
+drwxrwxrwt.  11 root    root    4096 Feb 21 14:49 [48;5;10;38;5;16mtmp[0m
+drwxr-xr-x.  13 root    root     155 May 12  2018 [38;5;27musr[0m
+drwxrwxr-x.   3 vagrant vagrant   54 Feb 19 13:20 [38;5;27mvagrant[0m
+drwxr-xr-x.  20 root    root    4096 Feb 20 15:48 [38;5;27mvar[0m
+]0;root@lvm:~[root@lvm ~]# ls -l /opt/
+total 0
+]0;root@lvm:~[root@lvm ~]# lvs
+  LV            VG          Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  LogVol00      VolGroup00  -wi-ao----   8.00g                                                    
+  LogVol01      VolGroup00  -wi-ao----   1.50g                                                    
+  LogVol_home   VolGroup00  Owi-aos---   2.00g                                                    
+  lv_opt_master otus_vg_opt -wi-a-----   6.59g                                                    
+  lv_opt_short  otus_vg_opt -wi-a-----   1.00g                                                    
+  lv_var        otus_vg_var rwi-aor--- 952.00m                                    100.00          
+]0;root@lvm:~[root@lvm ~]# lvremove lv_op[K[K[K[K[K/dev/
+/dev/otus_vg_opt/lv_opt_master  /dev/otus_vg_opt/lv_opt_short   /dev/otus_vg_var/lv_var         /dev/VolGroup00/LogVol00        /dev/VolGroup00/LogVol01        /dev/VolGroup00/LogVol_home
+[root@lvm ~]# lvremove /dev/otus_vg_opt/lv_opt_
+/dev/otus_vg_opt/lv_opt_master  /dev/otus_vg_opt/lv_opt_short   
+[root@lvm ~]# lvremove /dev/otus_vg_opt/lv_opt_master 
+Do you really want to remove active logical volume otus_vg_opt/lv_opt_master? [y/n]: y
+  Logical volume "lv_opt_master" successfully removed
+]0;root@lvm:~[root@lvm ~]# lvremove /dev/otus_vg_opt/lv_opt_master [Kshort 
+Do you really want to remove active logical volume otus_vg_opt/lv_opt_short? [y/n]: y
+  Logical volume "lv_opt_short" successfully removed
+]0;root@lvm:~[root@lvm ~]# ls[Kvs
+  LV          VG          Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  LogVol00    VolGroup00  -wi-ao----   8.00g                                                    
+  LogVol01    VolGroup00  -wi-ao----   1.50g                                                    
+  LogVol_home VolGroup00  Owi-aos---   2.00g                                                    
+  lv_var      otus_vg_var rwi-aor--- 952.00m                                    100.00          
+]0;root@lvm:~[root@lvm ~]# vgs
+  VG          #PV #LV #SN Attr   VSize   VFree 
+  VolGroup00    1   3   1 wz--n- <38.97g 27.34g
+  otus_vg_opt   2   0   0 wz--n-  10.99g 10.99g
+  otus_vg_var   2   1   0 wz--n-   2.99g  1.12g
+]0;root@lvm:~[root@lvm ~]# lsv[Kblk 
+NAME                            MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda                               8:0    0   40G  0 disk 
+├─sda1                            8:1    0    1M  0 part 
+├─sda2                            8:2    0    1G  0 part /boot
+└─sda3                            8:3    0   39G  0 part 
+  ├─VolGroup00-LogVol00         253:0    0    8G  0 lvm  /
+  ├─VolGroup00-LogVol01         253:1    0  1.5G  0 lvm  [SWAP]
+  ├─VolGroup00-LogVol_home-real 253:8    0    2G  0 lvm  
+  │ ├─VolGroup00-LogVol_home    253:2    0    2G  0 lvm  /home
+  │ └─VolGroup00-snap_home      253:10   0    2G  0 lvm  
+  └─VolGroup00-snap_home-cow    253:9    0  128M  0 lvm  
+    └─VolGroup00-snap_home      253:10   0    2G  0 lvm  
+sdb                               8:16   0   10G  0 disk 
+sdc                               8:32   0    2G  0 disk 
+├─otus_vg_var-lv_var_rmeta_0    253:3    0    4M  0 lvm  
+│ └─otus_vg_var-lv_var          253:7    0  952M  0 lvm  /var
+└─otus_vg_var-lv_var_rimage_0   253:4    0  952M  0 lvm  
+  └─otus_vg_var-lv_var          253:7    0  952M  0 lvm  /var
+sdd                               8:48   0    1G  0 disk 
+├─otus_vg_var-lv_var_rmeta_1    253:5    0    4M  0 lvm  
+│ └─otus_vg_var-lv_var          253:7    0  952M  0 lvm  /var
+└─otus_vg_var-lv_var_rimage_1   253:6    0  952M  0 lvm  
+  └─otus_vg_var-lv_var          253:7    0  952M  0 lvm  /var
+sde                               8:64   0    1G  0 disk 
+]0;root@lvm:~[root@lvm ~]# lvcreate --help [K 
+  lvcreate - Create a logical volume
+
+  Create a linear LV.
+  lvcreate -L|--size Size[m|UNIT] VG
+	[ -l|--extents Number[PERCENT] ]
+	[    --type linear ]
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Create a striped LV (infers --type striped).
+  lvcreate -i|--stripes Number -L|--size Size[m|UNIT] VG
+	[ -l|--extents Number[PERCENT] ]
+	[ -I|--stripesize Size[k|UNIT] ]
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Create a raid1 or mirror LV (infers --type raid1|mirror).
+  lvcreate -m|--mirrors Number -L|--size Size[m|UNIT] VG
+	[ -l|--extents Number[PERCENT] ]
+	[ -R|--regionsize Size[m|UNIT] ]
+	[    --mirrorlog core|disk ]
+	[    --minrecoveryrate Size[k|UNIT] ]
+	[    --maxrecoveryrate Size[k|UNIT] ]
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Create a raid LV (a specific raid level must be used, e.g. raid1).
+  lvcreate --type raid -L|--size Size[m|UNIT] VG
+	[ -l|--extents Number[PERCENT] ]
+	[ -m|--mirrors Number ]
+	[ -i|--stripes Number ]
+	[ -I|--stripesize Size[k|UNIT] ]
+	[ -R|--regionsize Size[m|UNIT] ]
+	[    --minrecoveryrate Size[k|UNIT] ]
+	[    --maxrecoveryrate Size[k|UNIT] ]
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Create a raid10 LV.
+  lvcreate -m|--mirrors Number -i|--stripes Number -L|--size Size[m|UNIT] VG
+	[ -l|--extents Number[PERCENT] ]
+	[ -I|--stripesize Size[k|UNIT] ]
+	[ -R|--regionsize Size[m|UNIT] ]
+	[    --minrecoveryrate Size[k|UNIT] ]
+	[    --maxrecoveryrate Size[k|UNIT] ]
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Create a COW snapshot LV of an origin LV.
+  lvcreate -s|--snapshot -L|--size Size[m|UNIT] LV
+	[ -l|--extents Number[PERCENT] ]
+	[ -i|--stripes Number ]
+	[ -I|--stripesize Size[k|UNIT] ]
+	[ -c|--chunksize Size[k|UNIT] ]
+	[    --type snapshot ]
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Create a thin pool.
+  lvcreate --type thin-pool -L|--size Size[m|UNIT] VG
+	[ -l|--extents Number[PERCENT] ]
+	[ -c|--chunksize Size[k|UNIT] ]
+	[ -i|--stripes Number ]
+	[ -I|--stripesize Size[k|UNIT] ]
+	[    --thinpool LV_new ]
+	[    --poolmetadatasize Size[m|UNIT] ]
+	[    --poolmetadataspare y|n ]
+	[    --discards passdown|nopassdown|ignore ]
+	[    --errorwhenfull y|n ]
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Create a cache pool.
+  lvcreate --type cache-pool -L|--size Size[m|UNIT] VG
+	[ -l|--extents Number[PERCENT] ]
+	[ -H|--cache ]
+	[ -c|--chunksize Size[k|UNIT] ]
+	[    --poolmetadatasize Size[m|UNIT] ]
+	[    --poolmetadataspare y|n ]
+	[    --cachemode writethrough|writeback|passthrough ]
+	[    --cachepolicy String ]
+	[    --cachesettings String ]
+	[    --cachemetadataformat auto|1|2 ]
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Create a thin LV in a thin pool (infers --type thin).
+  lvcreate -V|--virtualsize Size[m|UNIT] --thinpool LV_thinpool VG
+	[ -T|--thin ]
+	[    --type thin ]
+	[    --discards passdown|nopassdown|ignore ]
+	[    --errorwhenfull y|n ]
+	[ COMMON_OPTIONS ]
+
+  Create a thin LV that is a snapshot of an existing thin LV 
+  (infers --type thin).
+  lvcreate -s|--snapshot LV_thin
+	[    --type thin ]
+	[    --discards passdown|nopassdown|ignore ]
+	[    --errorwhenfull y|n ]
+	[ COMMON_OPTIONS ]
+
+  Create a thin LV that is a snapshot of an external origin LV.
+  lvcreate --type thin --thinpool LV_thinpool LV
+	[ -T|--thin ]
+	[ -c|--chunksize Size[k|UNIT] ]
+	[    --poolmetadatasize Size[m|UNIT] ]
+	[    --poolmetadataspare y|n ]
+	[    --discards passdown|nopassdown|ignore ]
+	[    --errorwhenfull y|n ]
+	[ COMMON_OPTIONS ]
+
+  Create a thin LV, first creating a thin pool for it, 
+  where the new thin pool is named by the --thinpool arg.
+  lvcreate --type thin -V|--virtualsize Size[m|UNIT] -L|--size Size[m|UNIT] --thinpool LV_new
+	[ -l|--extents Number[PERCENT] ]
+	[ -T|--thin ]
+	[ -c|--chunksize Size[k|UNIT] ]
+	[ -i|--stripes Number ]
+	[ -I|--stripesize Size[k|UNIT] ]
+	[    --poolmetadatasize Size[m|UNIT] ]
+	[    --poolmetadataspare y|n ]
+	[    --discards passdown|nopassdown|ignore ]
+	[    --errorwhenfull y|n ]
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Create a cache LV, first creating a new origin LV, 
+  then combining it with the existing cache pool named 
+  by the --cachepool arg.
+  lvcreate --type cache -L|--size Size[m|UNIT] --cachepool LV_cachepool VG
+	[ -l|--extents Number[PERCENT] ]
+	[ -H|--cache ]
+	[ -c|--chunksize Size[k|UNIT] ]
+	[ -i|--stripes Number ]
+	[ -I|--stripesize Size[k|UNIT] ]
+	[    --poolmetadatasize Size[m|UNIT] ]
+	[    --poolmetadataspare y|n ]
+	[    --cachemode writethrough|writeback|passthrough ]
+	[    --cachepolicy String ]
+	[    --cachesettings String ]
+	[    --cachemetadataformat auto|1|2 ]
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Common options for command:
+	[ -a|--activate y|n|ay ]
+	[ -A|--autobackup y|n ]
+	[ -C|--contiguous y|n ]
+	[ -M|--persistent y|n ]
+	[ -j|--major Number ]
+	[ -k|--setactivationskip y|n ]
+	[ -K|--ignoreactivationskip ]
+	[ -n|--name String ]
+	[ -p|--permission rw|r ]
+	[ -r|--readahead auto|none|Number ]
+	[ -W|--wipesignatures y|n ]
+	[ -Z|--zero y|n ]
+	[    --addtag Tag ]
+	[    --alloc contiguous|cling|cling_by_tags|normal|anywhere|inherit ]
+	[    --ignoremonitoring ]
+	[    --metadataprofile String ]
+	[    --minor Number ]
+	[    --monitor y|n ]
+	[    --nosync ]
+	[    --noudevsync ]
+	[    --reportformat basic|json ]
+
+  Common options for lvm:
+	[ -d|--debug ]
+	[ -h|--help ]
+	[ -q|--quiet ]
+	[ -v|--verbose ]
+	[ -y|--yes ]
+	[ -t|--test ]
+	[    --commandprofile String ]
+	[    --config String ]
+	[    --driverloaded y|n ]
+	[    --lockopt String ]
+	[    --longhelp ]
+	[    --profile String ]
+	[    --version ]
+
+  Use --longhelp to show all options and advanced commands.
+]0;root@lvm:~[root@lvm ~]# [K[root@lvm ~]# [K[root@lvm ~]# lvcreate --name op[K[Kopt_master /de[K[K[Kotus_vg_opt --cache
+--cache                --cachemode            --cachesettings        
+--cachemetadataformat  --cachepolicy          
+[root@lvm ~]# lvcreate --name opt_master otus_vg_opt --cache --snapsjot [K[K[K[Khot --siz[K[K[Kextents /dev/sd[K60[K[K60%FREE[C[C[C[C[C[C[C[C[10P[8P[1P
+WARNING: btrfs signature detected on /dev/otus_vg_opt/opt_master at offset 65600. Wipe it? [y/n]: y
+  Wiping btrfs signature on /dev/otus_vg_opt/opt_master.
+  Logical volume "opt_master" created.
+]0;root@lvm:~[root@lvm ~]# ls -l [K[K[K[K[K[Kvgs
+  VG          #PV #LV #SN Attr   VSize   VFree 
+  VolGroup00    1   3   1 wz--n- <38.97g 27.34g
+  otus_vg_opt   2   1   0 wz--n-  10.99g <4.40g
+  otus_vg_var   2   1   0 wz--n-   2.99g  1.12g
+]0;root@lvm:~[root@lvm ~]# lvs
+  LV          VG          Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  LogVol00    VolGroup00  -wi-ao----   8.00g                                                    
+  LogVol01    VolGroup00  -wi-ao----   1.50g                                                    
+  LogVol_home VolGroup00  Owi-aos---   2.00g                                                    
+  opt_master  otus_vg_opt -wi-a-----   6.59g                                                    
+  lv_var      otus_vg_var rwi-aor--- 952.00m                                    100.00          
+]0;root@lvm:~[root@lvm ~]# 
+]0;root@lvm:~[root@lvm ~]# lch[Kre[K[K[Kvcreate --type cache-pool[K[Klloll[C[K[C -L200M ot[K[Kde[K[K/dev/sd[K[Kot[K[K[K[K[K[K[Kotus_vg_opt[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cs[Kcreate --type cache-pool -L200M otus_vg_opt[4P[6P[5P[1@c[1@a[3@che
+--cache                --cachemode            --cachesettings        
+--cachemetadataformat  --cachepolicy          
+[root@lvm ~]# lvcreate --cache -L200M otus_vg_opt[C
+otus_vg_opt  otus_vg_var  VolGroup00   
+[root@lvm ~]# lvcreate --cache -L200M otus_vg_opt[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K-lo[Ki[Ko
+--lockopt   --longhelp  
+[root@lvm ~]# lvcreate --cache --lo[K[Ksi[K[K
+--activate              --discards              --mirrorlog             --reportformat
+--addtag                --driverloaded          --mirrors               --setactivationskip
+--alloc                 --errorwhenfull         --monitor               --stripes
+--autobackup            --extents               --name                  --stripesize
+--cache                 --help                  --nosync                --test
+--cachemetadataformat   --ignoreactivationskip  --noudevsync            --thin
+--cachemode             --ignoremonitoring      --permission            --thinpool
+--cachepolicy           --lockopt               --persistent            --type
+--cachesettings         --longhelp              --poolmetadatasize      --verbose
+--chunksize             --major                 --poolmetadataspare     --version
+--commandprofile        --maxrecoveryrate       --profile               --wipesignatures
+--config                --metadataprofile       --quiet                 --yes
+--contiguous            --minor                 --readahead             --zero
+--debug                 --minrecoveryrate       --regionsize            
+[root@lvm ~]# lvcreate --cache --extents %[K5[K10%FRE[K[K[K[K[K[K[K[K[K[K[K[K[K[Ksize 200M 
+otus_vg_opt  otus_vg_var  VolGroup00   
+[root@lvm ~]# lvcreate --cache --size 200M otus_vg_opt /dev/sd
+/dev/sda3  /dev/sdb   /dev/sdc   /dev/sdd   /dev/sde   
+[root@lvm ~]# lvcreate --cache --size 200M otus_vg_opt /dev/sd[K[K[K[K[K[K[K
+  Creation of cached volume and cache pool in one command is not yet supported.
+  Run `lvcreate --help' for more information.
+]0;root@lvm:~[root@lvm ~]# lvcreate --cache --size 200M otus_vg_opt lv_opt[K[K[K[K[K[K-na[K[K0-[K[K-name lv_opt_c
+  Creation of cached volume and cache pool in one command is not yet supported.
+  Run `lvcreate --help' for more information.
+]0;root@lvm:~[root@lvm ~]# lvcreate --cache --size 200M otus_vg_opt --name lv_opt_c[K[K
+  Creation of cached volume and cache pool in one command is not yet supported.
+  Run `lvcreate --help' for more information.
+]0;root@lvm:~[root@lvm ~]# lconv[K[K[K[Kvconvert --t[K[K[K
+anaconda-ks.cfg  .bash_logout     .bashrc          .lesshst         .ssh/            
+.bash_history    .bash_profile    .cshrc           original-ks.cfg  .tcshrc          
+[root@lvm ~]# lvconvert --help
+  lvconvert - Change logical volume layout
+
+  Convert LV to linear.
+  lvconvert --type linear LV
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Convert LV to striped.
+  lvconvert --type striped LV
+	[ -I|--stripesize Size[k|UNIT] ]
+	[ -R|--regionsize Size[m|UNIT] ]
+	[ -i|--interval Number ]
+	[    --stripes Number ]
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Convert LV to raid or change raid layout 
+  (a specific raid level must be used, e.g. raid1).
+  lvconvert --type raid LV
+	[ -m|--mirrors [+|-]Number ]
+	[ -I|--stripesize Size[k|UNIT] ]
+	[ -R|--regionsize Size[m|UNIT] ]
+	[ -i|--interval Number ]
+	[    --stripes Number ]
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Convert LV to raid1 or mirror, or change number of mirror images.
+  lvconvert -m|--mirrors [+|-]Number LV
+	[ -R|--regionsize Size[m|UNIT] ]
+	[ -i|--interval Number ]
+	[    --mirrorlog core|disk ]
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Convert raid LV to change number of stripe images.
+  lvconvert --stripes Number LV_raid
+	[ -i|--interval Number ]
+	[ -R|--regionsize Size[m|UNIT] ]
+	[ -I|--stripesize Size[k|UNIT] ]
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Convert raid LV to change the stripe size.
+  lvconvert -I|--stripesize Size[k|UNIT] LV_raid
+	[ -i|--interval Number ]
+	[ -R|--regionsize Size[m|UNIT] ]
+	[ COMMON_OPTIONS ]
+
+  Split images from a raid1 or mirror LV and use them to create a new LV.
+  lvconvert --splitmirrors Number -n|--name LV_new LV_cache_mirror_raid1
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Split images from a raid1 LV and track changes to origin for later merge.
+  lvconvert --splitmirrors Number --trackchanges LV_cache_raid1
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Merge LV images that were split from a raid1 LV.
+  lvconvert --mergemirrors VG|LV_linear_raid|Tag ...
+	[ COMMON_OPTIONS ]
+
+  Convert LV to a thin LV, using the original LV as an external origin.
+  lvconvert --type thin --thinpool LV LV_linear_striped_thin_cache_raid
+	[ -T|--thin ]
+	[ -r|--readahead auto|none|Number ]
+	[ -c|--chunksize Size[k|UNIT] ]
+	[ -Z|--zero y|n ]
+	[    --originname LV_new ]
+	[    --poolmetadata LV ]
+	[    --poolmetadatasize Size[m|UNIT] ]
+	[    --poolmetadataspare y|n ]
+	[    --metadataprofile String ]
+	[ COMMON_OPTIONS ]
+
+  Convert LV to type cache.
+  lvconvert --type cache --cachepool LV LV_linear_striped_thinpool_raid
+	[ -H|--cache ]
+	[ -Z|--zero y|n ]
+	[ -r|--readahead auto|none|Number ]
+	[ -c|--chunksize Size[k|UNIT] ]
+	[    --cachemetadataformat auto|1|2 ]
+	[    --cachemode writethrough|writeback|passthrough ]
+	[    --cachepolicy String ]
+	[    --cachesettings String ]
+	[    --poolmetadata LV ]
+	[    --poolmetadatasize Size[m|UNIT] ]
+	[    --poolmetadataspare y|n ]
+	[    --metadataprofile String ]
+	[ COMMON_OPTIONS ]
+
+  Convert LV to type thin-pool.
+  lvconvert --type thin-pool LV_linear_striped_cache_raid
+	[ -I|--stripesize Size[k|UNIT] ]
+	[ -r|--readahead auto|none|Number ]
+	[ -c|--chunksize Size[k|UNIT] ]
+	[ -Z|--zero y|n ]
+	[    --stripes Number ]
+	[    --discards passdown|nopassdown|ignore ]
+	[    --poolmetadata LV ]
+	[    --poolmetadatasize Size[m|UNIT] ]
+	[    --poolmetadataspare y|n ]
+	[    --metadataprofile String ]
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Convert LV to type cache-pool.
+  lvconvert --type cache-pool LV_linear_striped_raid
+	[ -Z|--zero y|n ]
+	[ -r|--readahead auto|none|Number ]
+	[ -c|--chunksize Size[k|UNIT] ]
+	[    --cachemetadataformat auto|1|2 ]
+	[    --cachemode writethrough|writeback|passthrough ]
+	[    --cachepolicy String ]
+	[    --cachesettings String ]
+	[    --poolmetadata LV ]
+	[    --poolmetadatasize Size[m|UNIT] ]
+	[    --poolmetadataspare y|n ]
+	[    --metadataprofile String ]
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Separate and keep the cache pool from a cache LV.
+  lvconvert --splitcache LV_thinpool_cache_cachepool
+	[ COMMON_OPTIONS ]
+
+  Merge thin LV into its origin LV.
+  lvconvert --mergethin LV_thin ...
+	[ COMMON_OPTIONS ]
+
+  Merge COW snapshot LV into its origin.
+  lvconvert --mergesnapshot LV_snapshot ...
+	[ -i|--interval Number ]
+	[ COMMON_OPTIONS ]
+
+  Combine a former COW snapshot (second arg) with a former 
+  origin LV (first arg) to reverse a splitsnapshot command.
+  lvconvert --type snapshot LV LV_linear_striped
+	[ -s|--snapshot ]
+	[ -c|--chunksize Size[k|UNIT] ]
+	[ -Z|--zero y|n ]
+	[ COMMON_OPTIONS ]
+
+  Replace failed PVs in a raid or mirror LV. 
+  Repair a thin pool. 
+  Repair a cache pool.
+  lvconvert --repair LV_thinpool_cache_cachepool_mirror_raid
+	[ -i|--interval Number ]
+	[    --usepolicies ]
+	[    --poolmetadataspare y|n ]
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Replace specific PV(s) in a raid LV with another PV.
+  lvconvert --replace PV LV_raid
+	[ COMMON_OPTIONS ]
+	[ PV ... ]
+
+  Poll LV to continue conversion.
+  lvconvert --startpoll LV_mirror_raid
+	[ COMMON_OPTIONS ]
+
+  Common options for command:
+	[ -b|--background ]
+	[ -f|--force ]
+	[    --alloc contiguous|cling|cling_by_tags|normal|anywhere|inherit ]
+	[    --noudevsync ]
+
+  Common options for lvm:
+	[ -d|--debug ]
+	[ -h|--help ]
+	[ -q|--quiet ]
+	[ -v|--verbose ]
+	[ -y|--yes ]
+	[ -t|--test ]
+	[    --commandprofile String ]
+	[    --config String ]
+	[    --driverloaded y|n ]
+	[    --lockopt String ]
+	[    --longhelp ]
+	[    --profile String ]
+	[    --version ]
+
+  Use --longhelp to show all options and advanced commands.
+]0;root@lvm:~[root@lvm ~]# lvconvert --help[K[K[K[Ktype cache[1Pcache[1Pcache[1Pcache[1Pcache[1Pcache[C[C[C[C[C 
+anaconda-ks.cfg  .bash_logout     .bashrc          .lesshst         .ssh/            
+.bash_history    .bash_profile    .cshrc           original-ks.cfg  .tcshrc          
+[root@lvm ~]# lvconvert --cache original-ks.cfg [K/dev/o
+oldmem       otus_vg_opt/ otus_vg_var/ 
+[root@lvm ~]# lvconvert --cache /dev/otus_vg_opt/opt_master opt_c
+  No command with matching syntax recognised.  Run 'lvconvert --help' for more information.
+  Nearest similar command has syntax:
+  lvconvert -H|--cache --cachepool LV LV_linear_striped_thinpool_raid
+  Convert LV to type cache (infers --type cache).
+
+]0;root@lvm:~[root@lvm ~]# lvconvert --cache /dev/otus_vg_opt/opt_master opt_c[C[C[1@-[C[C[1@-[1@t[1@y[1@p[1@e[1@ [1@c[1@a[1@c[1@h[1@e[1@ [C[1P[1P[1P[1P[1P[1P[1P[1P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Kstrip[Kp
+  No command with matching syntax recognised.  Run 'lvconvert --help' for more information.
+  Nearest similar command has syntax:
+  lvconvert --type cache --cachepool LV LV_linear_striped_thinpool_raid
+  Convert LV to type cache.
+
+]0;root@lvm:~[root@lvm ~]# lvconvert --type cache /dev/otus_vg_opt/opt_master opt_strip[1@-[1@p[1@o[1@o[1@l
+  Physical Volume "opt_strip" not found in Volume Group "otus_vg_opt".
+]0;root@lvm:~[root@lvm ~]# vgs
+  VG          #PV #LV #SN Attr   VSize   VFree 
+  VolGroup00    1   3   1 wz--n- <38.97g 27.34g
+  otus_vg_opt   2   1   0 wz--n-  10.99g <4.40g
+  otus_vg_var   2   1   0 wz--n-   2.99g  1.12g
+]0;root@lvm:~[root@lvm ~]# lvs
+  LV          VG          Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  LogVol00    VolGroup00  -wi-ao----   8.00g                                                    
+  LogVol01    VolGroup00  -wi-ao----   1.50g                                                    
+  LogVol_home VolGroup00  Owi-aos---   2.00g                                                    
+  opt_master  otus_vg_opt -wi-a-----   6.59g                                                    
+  lv_var      otus_vg_var rwi-aor--- 952.00m                                    100.00          
+]0;root@lvm:~[root@lvm ~]# lvcreate --size 1G --name opt_cache otus_vg_opt p[K[K /dev/sd
+/dev/sda3  /dev/sdb   /dev/sdc   /dev/sdd   /dev/sde   
+[root@lvm ~]# lvcreate --size 1G --name opt_cache otus_vg_opt /dev/sd[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1@#
+]0;root@lvm:~[root@lvm ~]# lsblk 
+NAME                            MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda                               8:0    0   40G  0 disk 
+├─sda1                            8:1    0    1M  0 part 
+├─sda2                            8:2    0    1G  0 part /boot
+└─sda3                            8:3    0   39G  0 part 
+  ├─VolGroup00-LogVol00         253:0    0    8G  0 lvm  /
+  ├─VolGroup00-LogVol01         253:1    0  1.5G  0 lvm  [SWAP]
+  ├─VolGroup00-LogVol_home-real 253:8    0    2G  0 lvm  
+  │ ├─VolGroup00-LogVol_home    253:2    0    2G  0 lvm  /home
+  │ └─VolGroup00-snap_home      253:10   0    2G  0 lvm  
+  └─VolGroup00-snap_home-cow    253:9    0  128M  0 lvm  
+    └─VolGroup00-snap_home      253:10   0    2G  0 lvm  
+sdb                               8:16   0   10G  0 disk 
+└─otus_vg_opt-opt_master        253:11   0  6.6G  0 lvm  
+sdc                               8:32   0    2G  0 disk 
+├─otus_vg_var-lv_var_rmeta_0    253:3    0    4M  0 lvm  
+│ └─otus_vg_var-lv_var          253:7    0  952M  0 lvm  /var
+└─otus_vg_var-lv_var_rimage_0   253:4    0  952M  0 lvm  
+  └─otus_vg_var-lv_var          253:7    0  952M  0 lvm  /var
+sdd                               8:48   0    1G  0 disk 
+├─otus_vg_var-lv_var_rmeta_1    253:5    0    4M  0 lvm  
+│ └─otus_vg_var-lv_var          253:7    0  952M  0 lvm  /var
+└─otus_vg_var-lv_var_rimage_1   253:6    0  952M  0 lvm  
+  └─otus_vg_var-lv_var          253:7    0  952M  0 lvm  /var
+sde                               8:64   0    1G  0 disk 
+]0;root@lvm:~[root@lvm ~]# lsblk #lvcreate --size 1G --name opt_cache otus_vg_opt /dev/sde [C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P
+  Insufficient free space: 256 extents needed, but only 255 available
+]0;root@lvm:~[root@lvm ~]# lvcreate --size 1G --name opt_cache otus_vg_opt /dev/sde [C[C[1@5[1@0[1@0[1P[1@M[1P
+  Logical volume "opt_cache" created.
+]0;root@lvm:~[root@lvm ~]# lvs
+  LV          VG          Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  LogVol00    VolGroup00  -wi-ao----   8.00g                                                    
+  LogVol01    VolGroup00  -wi-ao----   1.50g                                                    
+  LogVol_home VolGroup00  Owi-aos---   2.00g                                                    
+  opt_cache   otus_vg_opt -wi-a----- 500.00m                                                    
+  opt_master  otus_vg_opt -wi-a-----   6.59g                                                    
+  lv_var      otus_vg_var rwi-aor--- 952.00m                                    100.00          
+]0;root@lvm:~[root@lvm ~]# lvconvert --type cache[K[K[Khistory 30
+  539  vi /etc/fstab 
+  540  umount /opt/thunder_in_paradise/
+  541  umount /opt/
+  542  ls -l /
+  543  ls -l /opt/
+  544  lvs
+  545  lvremove /dev/otus_vg_opt/lv_opt_master 
+  546  lvremove /dev/otus_vg_opt/lv_opt_short 
+  547  lvs
+  548  vgs
+  549  lsblk 
+  550  lvcreate --help 
+  551  lvcreate --name opt_master otus_vg_opt --extents 60%FREE
+  552  vgs
+  553  lvs
+  554  lvcreate --cache --size 200M otus_vg_opt 
+  555  lvcreate --cache --size 200M otus_vg_opt --name lv_opt_c
+  556  lvcreate --cache --size 200M otus_vg_opt 
+  557  lvconvert --help
+  558  lvconvert --cache /dev/otus_vg_opt/opt_master opt_c
+  559  lvconvert --type cache /dev/otus_vg_opt/opt_master opt_strip
+  560  lvconvert --type cache-pool /dev/otus_vg_opt/opt_master opt_strip
+  561  vgs
+  562  lvs
+  563  #lvcreate --size 1G --name opt_cache otus_vg_opt /dev/sd
+  564  lsblk 
+  565  lvcreate --size 1G --name opt_cache otus_vg_opt /dev/sde 
+  566  lvcreate --size 500M --name opt_cache otus_vg_opt /dev/sde 
+  567  lvs
+  568  history 30
+]0;root@lvm:~[root@lvm ~]# mkd[Kfs
+mkfs         mkfs.btrfs   mkfs.cramfs  mkfs.ext2    mkfs.ext3    mkfs.ext4    mkfs.minix   mkfs.xfs
+[root@lvm ~]# mkfs/btr[K[K[K[K.btrfs /dev/otus_vg_opt/opt_
+opt_cache   opt_master  
+[root@lvm ~]# mkfs.btrfs /dev/otus_vg_opt/opt_master 
+btrfs-progs v4.9.1
+See http://btrfs.wiki.kernel.org for more information.
+
+Label:              (null)
+UUID:               6d31c3bc-d1a9-4d3d-94e4-6fbda15c4677
+Node size:          16384
+Sector size:        4096
+Filesystem size:    6.59GiB
+Block group profiles:
+  Data:             single            8.00MiB
+  Metadata:         DUP             337.56MiB
+  System:           DUP               8.00MiB
+SSD detected:       no
+Incompat features:  extref, skinny-metadata
+Number of devices:  1
+Devices:
+   ID        SIZE  PATH
+    1     6.59GiB  /dev/otus_vg_opt/opt_master
+
+]0;root@lvm:~[root@lvm ~]# 
+]0;root@lvm:~[root@lvm ~]# mkfs.btrfs /dev/otus_vg_opt/opt_master [C[C[C[C[C[C[C[C[C[C[C[C[C[Chistory 30[Klvs[Kcreate --size 500M --name opt_cache otus_vg_opt /dev/sde [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cs[Khistory 30mkfs.btrfs /dev/otus_vg_opt/opt_master [C[C[C[C[C[C[C[C[C[C[C[C[C[C[K!560:p
+lvconvert --type cache-pool /dev/otus_vg_opt/opt_master opt_strip
+[root@lvm ~]# lvconvert --type cache-pool /dev/otus_vg_opt/opt_master opt_strip[K[K[K[K[K[K[K[K[K[K[Kr /dev/otus_vg_opt/opt_cache 
+  Physical Volume "/dev/otus_vg_opt/opt_cache" not found in Volume Group "otus_vg_opt".
+]0;root@lvm:~[root@lvm ~]# exit
+logout
+]0;vagrant@lvm:~[vagrant@lvm ~]$ esxi[K[K[K[Kexit
+exit
+
+Script done on Thu 21 Feb 2019 03:03:24 PM UTC
